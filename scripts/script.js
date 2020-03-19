@@ -6,17 +6,58 @@
 
 // 3) добавить закрашивание клеток и отключение клика вокруг сбитого кораблика
 
+let currentElem = null;
 
 table.onmouseover = function(event) {
-    let target = event.target;
-    target.style.background = 'pink';
-    text.value += "mouseover " + target.tagName + "\n";
-    text.scrollTop = text.scrollHeight;
-  };
-  
+  if (currentElem) return;
+
+  let target = event.target.closest('td');
+
+  if (!target) return;
+  if (!table.contains(target)) return;
+
+  currentElem = target;
+  target.style.background = 'white';
+};
+
+
 table.onmouseout = function(event) {
-    let target = event.target;
-    target.style.background = '';
-    text.value += "mouseout " + target.tagName + "\n";
-    text.scrollTop = text.scrollHeight;
-}
+  if (!currentElem) return;
+
+  let relatedTarget = event.relatedTarget;
+
+  while (relatedTarget) {
+    if (relatedTarget == currentElem) return;
+    relatedTarget = relatedTarget.parentNode;
+  }
+
+  currentElem.style.background = '';
+  currentElem = null;
+};
+
+tableAi.onmouseover = function(event) {
+  if (currentElem) return;
+
+  let target = event.target.closest('td');
+
+  if (!target) return;
+  if (!tableAi.contains(target)) return;
+
+  currentElem = target;
+  target.style.background = 'white';
+};
+
+
+tableAi.onmouseout = function(event) {
+  if (!currentElem) return;
+
+  let relatedTarget = event.relatedTarget;
+
+  while (relatedTarget) {
+    if (relatedTarget == currentElem) return;
+    relatedTarget = relatedTarget.parentNode;
+  }
+
+  currentElem.style.background = '';
+  currentElem = null;
+};
