@@ -7,6 +7,25 @@
 // 3) добавить закрашивание клеток и отключение клика вокруг сбитого кораблика
 
 let currentElem = null;
+let arrUser = [];
+let arrAi = [];
+        
+function pushArr(arr) {
+  for (let i = 0; i < 10; i++){
+    arr[i] = [];
+    for (var j = 0; j < 10; j++) {
+        arr[i][j] = 0;
+    };
+  };
+
+  return arr;
+};
+
+pushArr(arrUser);
+pushArr(arrAi);
+
+console.log(arrUser);
+console.log(arrAi);
 
 table.onmouseover = function(event) {
   if (currentElem) return;
