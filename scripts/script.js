@@ -6,10 +6,30 @@
 
 // 3) добавить закрашивание клеток и отключение клика вокруг сбитого кораблика
 
-let currentElem = null;
 let arrUser = [];
 let arrAi = [];
-        
+let table = document.getElementById('table__one');
+let ships = document.getElementById('ship__tabel');
+
+pushArr(arrUser);
+
+function render() {
+  function createTable(arr) {
+    for (let i = 0; i < 10; i++){
+      for (var j = 0; j < 10; j++) {
+          if(arr[i][j] == 1) {
+            document.getElementById(`${i} - ${j}`).textContent = '1';
+          } else {
+            document.getElementById(`${i} - ${j}`).textContent = '0';
+          };
+      };
+    };
+  };
+
+  createTable(arrUser);
+};
+
+
 function pushArr(arr) {
   for (let i = 0; i < 10; i++){
     arr[i] = [];
@@ -21,62 +41,38 @@ function pushArr(arr) {
   return arr;
 };
 
-pushArr(arrUser);
-pushArr(arrAi);
-
-console.log(arrUser);
-console.log(arrAi);
-
-table.onmouseover = function(event) {
-  if (currentElem) return;
-
-  let target = event.target.closest('td');
-
-  if (!target) return;
-  if (!table.contains(target)) return;
-
-  currentElem = target;
-  target.style.background = 'white';
+function pushDelShip(arr, arrPush, val) {
+  (val == 'push') ? arrPush[arr[0]][arr[1]] = 1 : arrPush[arr[0]][arr[1]] = 0;
+  render();
 };
 
-
-table.onmouseout = function(event) {
-  if (!currentElem) return;
-
-  let relatedTarget = event.relatedTarget;
-
-  while (relatedTarget) {
-    if (relatedTarget == currentElem) return;
-    relatedTarget = relatedTarget.parentNode;
-  }
-
-  currentElem.style.background = '';
-  currentElem = null;
+function deleteShip(arr, arrDelete) {
+  arrDelete[arr[0]][arr[1]] = 0;
+  render();
 };
 
-tableAi.onmouseover = function(event) {
-  if (currentElem) return;
+table.onclick = function(event) {
+  let target = event.target; // где был клик?
+  let idVal = target.id.split(' - '); // координаты ячейки
 
-  let target = event.target.closest('td');
+  if (target.tagName != 'TD') return; // не на TD? тогда не интересует
 
-  if (!target) return;
-  if (!tableAi.contains(target)) return;
+  if(target.textContent == 0) {
+    target.style.backgroundColor = 'white';
 
-  currentElem = target;
-  target.style.background = 'white';
+    pushDelShip(idVal, arrUser, 'push');
+  } else {
+    target.style.backgroundColor = '';
+
+    pushDelShip(idVal, arrUser, 'del');
+  };
 };
 
+ships.onclick = function(event) {
+  let target = event.target;
+  console.log(target); // где был клик?
 
-tableAi.onmouseout = function(event) {
-  if (!currentElem) return;
+  if (target.id != 'checkShip') return; // не на TD? тогда не интересует
 
-  let relatedTarget = event.relatedTarget;
-
-  while (relatedTarget) {
-    if (relatedTarget == currentElem) return;
-    relatedTarget = relatedTarget.parentNode;
-  }
-
-  currentElem.style.background = '';
-  currentElem = null;
+  target.textContent = target.textContent - 1;
 };

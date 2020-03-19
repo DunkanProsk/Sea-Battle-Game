@@ -15,18 +15,16 @@ body {
 .block {
 	display: flex;
 	justify-content: center;
-	align-items: center;
 	margin-top: 5%;
 	padding: 30px;
-  	width:1350px;
-  	height:600px;
+	width: 1300px;
+  	height: 630px;
   	background: #fff;
   	border-radius: 30px;
   	box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 	font-size: 30px;
 	text-align: center;
 	transition: all 0.2s ease;
-	overflow:hidden;
 }
 
 .block__tabel {
@@ -34,49 +32,76 @@ body {
 }
 
 .titleOne {
-	margin: 15px;
 	margin-top: 30px;
 	padding: 0;
 	font-weight: 700;
 }
 
 table {
+	cursor: default;
 	font-size: 14px;
 	border-radius: 10px;
 	border-spacing: 0;
 	text-align: center;
-}
-
-th, .color {
-	background: white;
-	color: black;
-	padding: 10px 20px;
-	border-color: white; 
-}
-
-.color {
-	border-right-color: black;
-}
-
-th {
-	border-bottom-color: black;
-}
-
-.non__bord {
-	border-bottom-color: white;
+	-webkit-user-select: none;
 }
 
 th, td {
 	border-style: solid;
-	border-width: 0 1px 1px 0;
+	border-width: 1px 1px 1px 1px;
 	
 }
 
-th:first-child, td:first-child {
-	text-align: center;
+td {
+	padding: 15px 20px;
+	background: #4b77a8;;
 }
 
-td {
-	padding: 10px 20px;
-	background: #4b77a8;;
+.ship__value {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin: 0 30px;
+	width: 50px;
+	height: 630px;
+	-webkit-user-select: none;
+}
+
+.ship__tabel {
+	display: flex;
+	flex-direction: column;
+	height: 470px;
+	justify-content: space-between;
+}
+
+.onePal, .twoPal, .threePal, .fourPal {
+	display: flex;
+	justify-content: center;
+	border-style: solid;
+	border-style: solid;
+	border-width: 1px;
+	border-color: black;
+	align-items: center;
+	font-size: 20px;
+	background-color: #4b77a8;
+}
+
+.onePal {
+	width:50px;
+	height:50px;
+}
+
+.twoPal {
+	width:50px;
+	height:80px;
+}
+
+.threePal {
+	width:50px;
+	height:120px;
+}
+
+.fourPal {
+	width:50px;
+	height:170px;
 }
