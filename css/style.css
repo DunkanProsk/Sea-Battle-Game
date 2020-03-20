@@ -1,4 +1,5 @@
 body {
+	-webkit-user-select: none;
 	display: flex;
 	justify-content: center;
 	box-sizing: border-box;
@@ -62,14 +63,15 @@ td {
 	align-items: center;
 	flex-direction: column;
 	margin: 0 30px;
-	width: 50px;
+	width: 100px;
 	height: 630px;
 	-webkit-user-select: none;
 }
 
 .ship__tabel {
 	display: flex;
-	flex-direction: column;
+	align-items: flex-start;
+	flex-direction: row-reverse;
 	height: 470px;
 	justify-content: space-between;
 }
@@ -77,31 +79,32 @@ td {
 .onePal, .twoPal, .threePal, .fourPal {
 	display: flex;
 	justify-content: center;
+	margin: 5px;
 	border-style: solid;
 	border-style: solid;
 	border-width: 1px;
 	border-color: black;
 	align-items: center;
 	font-size: 20px;
-	background-color: #4b77a8;
+	background-color: #a9abad;
 }
 
 .onePal {
-	width:50px;
-	height:50px;
+	width:48px;
+	height:46px;
 }
 
 .twoPal {
-	width:50px;
-	height:80px;
+	width:48px;
+	height:90px;
 }
 
 .threePal {
-	width:50px;
-	height:120px;
+	width:48px;
+	height:137px;
 }
 
 .fourPal {
-	width:50px;
-	height:170px;
+	width:48px;
+	height:185px;
 }

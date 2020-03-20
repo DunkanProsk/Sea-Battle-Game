@@ -14,6 +14,7 @@
 
 let arrUser = [];
 let arrAi = [];
+let checkGetShip = 0;
 let table = document.getElementById('table__one');
 let ships = document.getElementById('ship__tabel');
 
@@ -30,6 +31,7 @@ let ships = document.getElementById('ship__tabel');
 
 function pushDelShip(x, y, arrPush, val) {
   (val == 'push') ? arrPush[x][y] = 1 : arrPush[x][y] = 0;
+  checkGetShip == 0;
   render();
 };
 
@@ -57,34 +59,59 @@ table.onclick = function(event) {
 
   if (target.tagName != 'TD') return;
 
-  if(target.textContent == 0) {
-    if(checkEmptyOne(x, y, arrUser)) {
-      target.style.backgroundColor = 'white';
+  if(checkGetShip == 1) {
+    if(target.textContent == 0) {
+      if(checkEmptyOne(x, y, arrUser)) {
+        target.style.backgroundColor = 'white';
 
-      pushDelShip(x, y, arrUser, 'push');
-      render();
+        pushDelShip(x, y, arrUser, 'push');
+        render();
+      } else {
+        alert('Клетка не подходит!');
+      };
     } else {
-      alert('Клетка не подходит!');
+      target.style.backgroundColor = '';
+
+      pushDelShip(x, y, arrUser, 'del');
     };
   } else {
-    target.style.backgroundColor = '';
-
-    pushDelShip(x, y, arrUser, 'del');
+    alert('Выберете карабль!');
   };
 };
 
-ships.onclick = function(event) {
-  let target = event.target;
+ships.onmousedown = function(event) {
+  let value = document.getElementById(event.target.id);
 
-  if (target.id != 'checkShip') return;
+  console.log(value);
 
-  target.textContent = target.textContent - 1;
+  value.style.position = 'absolute';
+  value.style.zIndex = 1000;
+    
+  document.body.append(value);
+
+  moveAt(event.pageX, event.pageY);
+
+  function moveAt(pageX, pageY) {
+    value.style.left = pageX - value.offsetWidth / 2 + 'px';
+    value.style.top = pageY - value.offsetHeight / 2 + 'px';
+  }
+
+  function onMouseMove(event) {
+    moveAt(event.pageX, event.pageY);
+  }
+
+  document.addEventListener('mousemove', onMouseMove);
+
+  value.onmouseup = function() {
+    document.removeEventListener('mousemove', onMouseMove);
+    value.onmousedown = null;
+  };
 };
 
 function checkEmptyOne(x, y, arr) {
   
   if((x > 0 && y > 0) && (x < 9 && y < 9)) {
-    
+
     if(checkAll(x, y)) {
       return true;
     };
