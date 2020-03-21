@@ -12,13 +12,21 @@
 
 // arr[x + 1][y - 1]  arr[x + 1][y]  arr[x + 1][y + 1]
 
-let arrUser = [];
-let arrAi = [];
-let checkGetShip = 0;
-let onePalShip = 4;
-let twoPalShip = 3;
-let threePalShip = 2;
-let fourPalShip = 1;
+let arrUser = [],
+    arrAi = [],
+    checkGetShip = 0,
+    onePalShip = 4,
+    twoPalShip = 3,
+    threePalShip = 2,
+    fourPalShip = 1;
+
+let shipTwoOne = 1,
+    shipTwoTwo = 1,
+    shipTwoThree = 1,
+    shipThreeOne = 1,
+    shipThreeTwo = 1,
+    shipFourOne = 1;
+
 
 let table = document.getElementById('table__one');
 table.onmouseover = table.onmouseout = handler;
@@ -163,18 +171,30 @@ buttonReset.onclick = function(event) {
   
   ships.innerHTML = `
     <div id="ship__flex">
-    <div class="onePal" id="shipOneOne"> </div>
-    <div class="onePal" id="shipOneTwo"> </div>
-    <div class="onePal" id="shipOneThree"> </div>
-    <div class="onePal" id="shipOneFour"> </div>
-    <div class="twoPal" id="shipTwoOne"> </div>
-    <div class="twoPal" id="shipTwoTwo"> </div>
-    <div class="twoPal" id="shipTwoThree"> </div>
+    <div class='onePal' id='shipOneOne'> </div>
+    <div class='onePal' id='shipOneTwo'> </div>
+    <div class='onePal' id='shipOneThree'> </div>
+    <div class='onePal' id='shipOneFour'> </div>
+    <div class='twoPal' id='shipTwoOne'>
+        <img src="https://img.icons8.com/ios-filled/100/000000/rotate.png" class='pictureTwo' id='picture'/>
+    </div>
+    <div class='twoPal' id='shipTwoTwo'>
+        <img src="https://img.icons8.com/ios-filled/100/000000/rotate.png" class='pictureTwo' id='picture'/>
+    </div>
+    <div class='twoPal' id='shipTwoThree'>
+        <img src="https://img.icons8.com/ios-filled/100/000000/rotate.png" class='pictureTwo' id='picture'/>
+    </div>
     </div>
     <div id="ship__flex">
-      <div class="threePal" id="shipThreeOne"> </div>
-      <div class="threePal" id="shipThreeTwo"> </div>
-      <div class="fourPal" id="shipFourOne"> </div>
+      <div class='threePal' id='shipThreeOne'>
+          <img src="https://img.icons8.com/ios-filled/100/000000/rotate.png" class='pictureThree' id='picture'/>
+      </div>
+      <div class='threePal' id='shipThreeTwo'>
+          <img src="https://img.icons8.com/ios-filled/100/000000/rotate.png" class='pictureThree' id='picture'/>
+      </div>
+      <div class='fourPal' id='shipFourOne'>
+          <img src="https://img.icons8.com/ios-filled/100/000000/rotate.png" class='pictureFour' id='picture'/>
+      </div>
     </div>
   `;
   
@@ -183,12 +203,19 @@ buttonReset.onclick = function(event) {
   threePalShip = 2;
   fourPalShip = 1;
 
+  shipTwoOne = 1;
+  shipTwoTwo = 1;
+  shipTwoThree = 1;
+  shipThreeOne = 1;
+  shipThreeTwo = 1;
+  shipFourOne = 1;
+
   pushArr(arrUser);
   render();
 };
 
 ships.onclick = function(event) {
-  if(checkGetShip == 0) {
+  if(checkGetShip == 0 && event.target.id != 'picture') {
     if((event.target.id == 'ship__tabel') || (event.target.id == 'ship__flex')) return;
 
     if(event.target.className == 'onePal') {
@@ -208,9 +235,84 @@ ships.onclick = function(event) {
     };
 
     document.getElementById(event.target.id).remove();
+  } else if(event.target.id == 'picture') {
+      if(event.target.className == 'pictureTwo') {
+        switch(event.target.parentNode.id) {
+          case 'shipTwoOne':
+            if(shipTwoOne == 1) {
+              event.target.parentNode.style.width = '90px';
+              event.target.parentNode.style.height = '48px';
+              return shipTwoOne = 0;
+            } else {
+              event.target.parentNode.style.width = '48px';
+              event.target.parentNode.style.height = '90px';
+              return shipTwoOne = 1;
+            };
+
+          case 'shipTwoTwo':
+            if(shipTwoTwo == 1) {
+              event.target.parentNode.style.width = '90px';
+              event.target.parentNode.style.height = '48px';
+              return shipTwoTwo = 0;
+            } else {
+              event.target.parentNode.style.width = '48px';
+              event.target.parentNode.style.height = '90px';
+              return shipTwoTwo = 1;
+            };
+
+          case 'shipTwoThree':
+            if(shipTwoThree == 1) {
+              event.target.parentNode.style.width = '90px';
+              event.target.parentNode.style.height = '48px';
+              return shipTwoThree = 0;
+            } else {
+              event.target.parentNode.style.width = '48px';
+              event.target.parentNode.style.height = '90px';
+              return shipTwoThree = 1;
+            };
+        };
+      };
+
+      if(event.target.className == 'pictureThree') {
+        switch(event.target.parentNode.id) {
+          case 'shipThreeOne':
+            if(shipThreeOne == 1) {
+              event.target.parentNode.style.width = '137px';
+              event.target.parentNode.style.height = '48px';
+              return shipThreeOne = 0;
+            } else {
+              event.target.parentNode.style.width = '48px';
+              event.target.parentNode.style.height = '137px';
+              return shipThreeOne = 1;
+            };
+
+          case 'shipThreeTwo':
+            if(shipThreeTwo == 1) {
+              event.target.parentNode.style.width = '137px';
+              event.target.parentNode.style.height = '48px';
+              return shipThreeTwo = 0;
+            } else {
+              event.target.parentNode.style.width = '48px';
+              event.target.parentNode.style.height = '137px';
+              return shipThreeTwo = 1;
+            };
+        };
+      };
+
+      if(event.target.className == 'pictureFour') {
+        if(shipFourOne == 1) {
+          event.target.parentNode.style.width = '185px';
+          event.target.parentNode.style.height = '48px';
+          return shipFourOne = 0;
+        } else {
+          event.target.parentNode.style.width = '48px';
+          event.target.parentNode.style.height = '185px';
+          return shipFourOne = 1;
+        };
+      };
   } else {
     alert('Post previous ship!');
-  }; 
+  };
 };
 
 function checkEmptyOne(x, y, arr) {
