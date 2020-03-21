@@ -14,7 +14,11 @@
 
 let arrUser = [];
 let arrAi = [];
-let checkGetShip = 1;
+let checkGetShip = 0;
+let onePalShip = 4;
+let twoPalShip = 3;
+let threePalShip = 2;
+let fourPalShip = 1;
 
 let table = document.getElementById('table__one');
 table.onmouseover = table.onmouseout = handler;
@@ -60,49 +64,97 @@ function render() {
 };
 
 function handler(event) {
-  let target = event.target;
-  let idVal = target.id.split(' - ');
-  let x = Number(idVal[0]);
-  let y = Number(idVal[1]);
+  if(checkGetShip == 1) {
+    let target = event.target;
+    let idVal = target.id.split(' - ');
+    let x = Number(idVal[0]);
+    let y = Number(idVal[1]);
 
-  if (event.type == 'mouseover') {
-    if(checkEmptyOne(x, y, arrUser)) {
-      target.style.background = '#6cf7aa';
-    } else {
-      target.style.background = '#fd344fc2';
+    if (event.type == 'mouseover') {
+      if(checkEmptyOne(x, y, arrUser)) {
+        target.style.background = '#6cf7aa';
+      } else {
+        target.style.background = '#fd344fc2';
+      };
     };
-  };
 
-  if (event.type == 'mouseout') {
-    if(target.textContent == 0) {
-      target.style.background = ''
-    } else {
-      target.style.background = 'white';
+    if (event.type == 'mouseout') {
+      if(target.textContent == 0) {
+        target.style.background = ''
+      } else {
+        target.style.background = 'white';
+      };
     };
   };
 };
 
 table.onclick = function(event) {
-  let target = event.target;
-  let idVal = target.id.split(' - ');
-  let x = Number(idVal[0]);
-  let y = Number(idVal[1]);
-
-  if (target.tagName != 'TD') return;
   
-  if(target.textContent == 0) {
-    if(checkEmptyOne(x, y, arrUser)) {
-      target.style.backgroundColor = 'white';
-
-      pushDelShip(x, y, arrUser, 'push');
-      render();
-    } else {
-      alert('Клетка не подходит!');
+  if(checkGetShip == 1) {
+    if(onePalShip > 0) {
+      if(createNewShipOnTabel()) {
+        onePalShip = onePalShip - 1;
+        return checkGetShip = 0;
+      };
     };
-  } else {
-    target.style.backgroundColor = '';
+  };
 
-    pushDelShip(x, y, arrUser, 'del');
+  if(checkGetShip == 2) {
+    if(twoPalShip > 0) {
+      if(createNewShipOnTabel()) {
+        twoPalShip = twoPalShip - 1;
+        return checkGetShip = 0;
+      };
+    };
+  };
+
+  if(checkGetShip == 3) {
+    if(threePalShip > 0) {
+      if(createNewShipOnTabel()) {
+        threePalShip = threePalShip - 1;
+        return checkGetShip = 0;
+      };
+    };
+  };
+
+  if(checkGetShip == 4) {
+    if(fourPalShip > 0) {
+      if(createNewShipOnTabel()) {
+        fourPalShip = fourPalShip - 1;
+        return checkGetShip = 0;
+      };
+    };
+  };
+
+  if(checkGetShip == 0) {
+    return alert('Choose a ship!');
+  };
+
+  function createNewShipOnTabel() {
+    let target = event.target;
+    let idVal = target.id.split(' - ');
+    let x = Number(idVal[0]);
+    let y = Number(idVal[1]);
+
+    if (target.tagName != 'TD') return false;
+    
+    if(target.textContent == 0) {
+      if(checkEmptyOne(x, y, arrUser)) {
+        target.style.backgroundColor = 'white';
+
+        pushDelShip(x, y, arrUser, 'push');
+        render();
+        return true;
+      } else {
+        alert('The cage does not fit!');
+        return false;
+      };
+    } else {
+      target.style.backgroundColor = '';
+
+      pushDelShip(x, y, arrUser, 'del');
+      return true;
+    };
   };
 };
 
@@ -126,30 +178,39 @@ buttonReset.onclick = function(event) {
     </div>
   `;
   
+  onePalShip = 4;
+  twoPalShip = 3;
+  threePalShip = 2;
+  fourPalShip = 1;
+
   pushArr(arrUser);
   render();
 };
 
 ships.onclick = function(event) {
-  if((event.target.id == 'ship__tabel') || (event.target.id == 'ship__flex')) return;
+  if(checkGetShip == 0) {
+    if((event.target.id == 'ship__tabel') || (event.target.id == 'ship__flex')) return;
 
-  if(event.target.className == 'onePal') {
-    checkGetShip = 1;
-  };
+    if(event.target.className == 'onePal') {
+      checkGetShip = 1;
+    };
 
-  if(event.target.className == 'twoPal') {
-    checkGetShip = 2;
-  };
+    if(event.target.className == 'twoPal') {
+      checkGetShip = 2;
+    };
 
-  if(event.target.className == 'threePal') {
-    checkGetShip = 3;
-  };
+    if(event.target.className == 'threePal') {
+      checkGetShip = 3;
+    };
 
-  if(event.target.className == 'fourPal') {
-    checkGetShip = 4;
-  };
+    if(event.target.className == 'fourPal') {
+      checkGetShip = 4;
+    };
 
-  document.getElementById(event.target.id).remove();
+    document.getElementById(event.target.id).remove();
+  } else {
+    alert('Post previous ship!');
+  }; 
 };
 
 function checkEmptyOne(x, y, arr) {
@@ -330,33 +391,3 @@ function checkEmpty(arr) {
 function checkEmpty(arr) {
   
 };
-
-// ships.onmousedown = function(event) {                                                //попытка drag&drop для кораблей  
-//   let value = document.getElementById(event.target.id);
-
-//   if((event.target.id == 'ship__tabel') || (event.target.id == 'ship__flex')) return;
-
-//   value.style.position = 'absolute';
-//   value.style.zIndex = 1000;
-    
-//   document.body.append(value);
-
-//   moveAt(event.pageX, event.pageY);
-
-//   function moveAt(pageX, pageY) {
-//     value.style.left = pageX - value.offsetWidth / 2 + 'px';
-//     value.style.top = pageY - value.offsetHeight / 2 + 'px';
-//   };
-
-//   function onMouseMove(event) {
-//     moveAt(event.pageX, event.pageY);
-//   };
-
-//   document.addEventListener('mousemove', onMouseMove);
-
-//   value.onclick = function() {
-//     document.removeEventListener('mousemove', onMouseMove);
-//     checkGetShip == 1;
-//     value.onmousedown = null;
-//   };
-// };
