@@ -8,11 +8,7 @@
 
 let arrUser = [],
     arrAi = [],
-    checkGetShip = 0,
-    onePalShip = 4,
-    twoPalShip = 3,
-    threePalShip = 2,
-    fourPalShip = 1;
+    checkGetShip = 0;
 
 let shipTwoOne = 1,
     shipTwoTwo = 1,
@@ -43,20 +39,15 @@ function pushArr(arr) {
   return arr;
 };
 
-function pushDelShip(x, y, arrPush, val) {
-  (val == 'push') ? arrPush[x][y] = 1 : arrPush[x][y] = 0;
+function pushDelShip(x, y, arrPush) {
+  arrPush[x][y] = 1;
   checkGetShip == 0;
   render();
 };
 
 function pushDelShipTwo(x, y, arrPush, val) {
-  if(val == 'push') {
-    arrPush[x][y] = 1;
-    arrPush[x - 1][y] = 1;
-  } else {
-    arrPush[x][y] = 0;
-    arrPush[x - 1][y] = 0;
-  };
+  arrPush[x][y] = 1;
+  arrPush[x - 1][y] = 1;
   
   checkGetShip == 0;
   render();
@@ -233,19 +224,14 @@ table.onclick = function(event) {
       if(checkEmptyOne(x, y, arrUser)) {
         target.style.backgroundColor = 'white';
 
-        pushDelShip(x, y, arrUser, 'push');
+        pushDelShip(x, y, arrUser);
         render();
         return true;
-      } else {
-        alert('The cage does not fit!');
-        return false;
       };
-    } else {
-      target.style.backgroundColor = '';
-
-      pushDelShip(x, y, arrUser, 'del');
-      return true;
     };
+    
+    alert('The cage does not fit!');
+    return false;
   };
 
   function createNewShipTwoOnTabel() {     ////////////111111111
@@ -262,7 +248,7 @@ table.onclick = function(event) {
         document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
         document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
 
-        pushDelShipTwo(x, y, arrUser, 'push');
+        pushDelShipTwo(x, y, arrUser);
 
         render();
         return true;
@@ -270,17 +256,9 @@ table.onclick = function(event) {
         alert('The cage does not fit!');
         return false;
       };
-    } else {
-      target.style.backgroundColor = '';
-
-      pushDelShipTwo(x, y, arrUser, 'del');
-
-      return true;
-    };
+    } return false;
   };
 };
-
-
 
 function checkEmptyTwo(x, y, val, arr) {
   switch(val) {
@@ -413,6 +391,10 @@ function checkEmptyTwo(x, y, val, arr) {
 
     if(arr[x - 2][y - 1] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
+    if(arr[x - 1][y] == 1) return false;
+
     return true;
   };
 
@@ -424,6 +406,10 @@ function checkEmptyTwo(x, y, val, arr) {
     if(arr[x + 1][y + 1] != 0) return false;
 
     if(arr[x + 1][y] != 0) return false;
+
+    if(arr[x][y] == 1) return false;
+
+    if(arr[x - 1][y] == 1) return false;
 
     return true;
   };
@@ -437,6 +423,10 @@ function checkEmptyTwo(x, y, val, arr) {
 
     if(arr[x - 1][y - 1] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
+    if(arr[x - 1][y] == 1) return false;
+
     return true;
   };
 
@@ -449,6 +439,10 @@ function checkEmptyTwo(x, y, val, arr) {
 
     if(arr[x - 2][y - 1] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
+    if(arr[x - 1][y] == 1) return false;
+
     return true;
   };
 
@@ -460,6 +454,10 @@ function checkEmptyTwo(x, y, val, arr) {
     if(arr[x - 1][y + 1] != 0) return false;
 
     if(arr[x][y + 1] != 0) return false;
+
+    if(arr[x][y] == 1) return false;
+
+    if(arr[x - 1][y] == 1) return false;
 
     return true;
   };
@@ -479,6 +477,10 @@ function checkEmptyTwo(x, y, val, arr) {
     
     if(arr[x - 2][y - 1] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
+    if(arr[x - 1][y] == 1) return false;
+
     return true;
   };
 
@@ -497,6 +499,10 @@ function checkEmptyTwo(x, y, val, arr) {
 
     if(arr[x - 1][y - 1] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
+    if(arr[x - 1][y] == 1) return false;
+
     return true;
   };
 
@@ -512,6 +518,10 @@ function checkEmptyTwo(x, y, val, arr) {
     if(arr[x + 1][y + 1] != 0) return false;
 
     if(arr[x + 1][y] != 0) return false;
+
+    if(arr[x][y] == 1) return false;
+
+    if(arr[x - 1][y] == 1) return false;
 
     return true;
   };
@@ -529,17 +539,17 @@ function checkEmptyTwo(x, y, val, arr) {
 
     if(arr[x - 2][y - 1] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
+    if(arr[x - 1][y] == 1) return false;
+
     return true;
   };
 };
 
-function checkEmpty(arr) {
-  
-};
+function checkEmptyTree(arr) {};
 
-function checkEmpty(arr) {
-  
-};
+function checkEmptyFour(arr) {};
 
 function checkEmptyOne(x, y, arr) {
   
@@ -608,6 +618,8 @@ function checkEmptyOne(x, y, arr) {
 
     if(arr[x][y - 1] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
     return true;
   };
 
@@ -617,6 +629,8 @@ function checkEmptyOne(x, y, arr) {
     if(arr[x + 1][y + 1] != 0) return false;
 
     if(arr[x + 1][y] != 0) return false;
+
+    if(arr[x][y] == 1) return false;
 
     return true;
   };
@@ -628,6 +642,8 @@ function checkEmptyOne(x, y, arr) {
 
     if(arr[x + 1][y] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
     return true;
   };
 
@@ -638,6 +654,8 @@ function checkEmptyOne(x, y, arr) {
 
     if(arr[x][y - 1] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
     return true;
   };
 
@@ -647,6 +665,8 @@ function checkEmptyOne(x, y, arr) {
     if(arr[x - 1][y + 1] != 0) return false;
 
     if(arr[x - 1][y] != 0) return false;
+
+    if(arr[x][y] == 1) return false;
 
     return true;
   };
@@ -662,6 +682,8 @@ function checkEmptyOne(x, y, arr) {
 
     if(arr[x][y + 1] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
     return true;
   };
 
@@ -675,6 +697,8 @@ function checkEmptyOne(x, y, arr) {
     if(arr[x + 1][y + 1] != 0) return false;
 
     if(arr[x][y + 1] != 0) return false;
+
+    if(arr[x][y] == 1) return false;
 
     return true;
   };
@@ -690,6 +714,8 @@ function checkEmptyOne(x, y, arr) {
 
     if(arr[x + 1][y] != 0) return false;
 
+    if(arr[x][y] == 1) return false;
+
     return true;
   };
 
@@ -703,6 +729,8 @@ function checkEmptyOne(x, y, arr) {
     if(arr[x + 1][y - 1] != 0) return false;
 
     if(arr[x + 1][y] != 0) return false;
+
+    if(arr[x][y] == 1) return false;
 
     return true;
   };
