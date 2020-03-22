@@ -119,9 +119,9 @@ function handler(event) {
       if(checkEmptyTwo(x, y, whichShipSelect, arrUser)) {
         if(x == 0) {
           document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
-        } else {
-          document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#6cf7aa';
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
+        } else { 
+            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
         };
       } else {
         if(x == 0) {
@@ -138,14 +138,22 @@ function handler(event) {
         if(x == 0) {
           document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
         } else {
-          document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '';
+          if(arrUser[x - 1][y] == 1) {
+            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+          } else {
+            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '';
+          };
           document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
         };
       } else {
         if(x == 0) {
           document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
         } else {
-          document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+          if(arrUser[x - 1][y] == 1) {
+            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+          } else {
+            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '';
+          };
           document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
         };
       };
@@ -853,6 +861,8 @@ buttonReset.onclick = function(event) {
   shipThreeOne = 1;
   shipThreeTwo = 1;
   shipFourOne = 1;
+
+  checkGetShip = 0;
 
   pushArr(arrUser);
   render();
