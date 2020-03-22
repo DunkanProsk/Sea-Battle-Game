@@ -8,16 +8,14 @@
 
 let arrUser = [],
     arrAi = [],
-    checkGetShip = 0;
-
-let shipTwoOne = 1,
+    checkGetShip = 0,
+    shipTwoOne = 1,
     shipTwoTwo = 1,
     shipTwoThree = 1,
     shipThreeOne = 1,
     shipThreeTwo = 1,
-    shipFourOne = 1;
-
-let whichShipSelect = '';
+    shipFourOne = 1,
+    whichShipSelect = '';
 
 let table = document.getElementById('table__one');
 table.onmouseover = table.onmouseout = handler;
@@ -29,7 +27,7 @@ let divShips = document.getElementById('ship__value').innerHTML;
 pushArr(arrUser);
 
 function pushArr(arr) {
-  for (let i = 0; i < 10; i++){
+  for(let i = 0; i < 10; i++){
     arr[i] = [];
     for (var j = 0; j < 10; j++) {
         arr[i][j] = 0;
@@ -46,11 +44,19 @@ function pushDelShip(x, y, arrPush) {
 };
 
 function pushDelShipTwo(x, y, arrPush, val) {
-  arrPush[x][y] = 1;
-  arrPush[x - 1][y] = 1;
-  
-  checkGetShip == 0;
-  render();
+  if(val == 1) {
+    arrPush[x][y] = 1;
+    arrPush[x - 1][y] = 1;
+    
+    checkGetShip == 0;
+    render();
+  } else {
+    arrPush[x][y] = 1;
+    arrPush[x][y + 1] = 1;
+    
+    checkGetShip == 0;
+    render();
+  };
 };
 
 function render() {
@@ -77,7 +83,7 @@ function handler(event) {
     let x = Number(idVal[0]);
     let y = Number(idVal[1]);
 
-    if (event.type == 'mouseover') {
+    if(event.type == 'mouseover') {
       if(checkEmptyOne(x, y, arrUser)) {
         target.style.background = '#6cf7aa';
       } else {
@@ -85,7 +91,7 @@ function handler(event) {
       };
     };
 
-    if (event.type == 'mouseout') {
+    if(event.type == 'mouseout') {
       if(target.textContent == 0) {
         target.style.background = ''
       } else {
@@ -100,46 +106,122 @@ function handler(event) {
     let x = Number(idVal[0]);
     let y = Number(idVal[1]);
 
-    if (event.type == 'mouseover') {
-      if(checkEmptyTwo(x, y, whichShipSelect, arrUser)) {
-        if(x == 0) {
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
-        } else { 
-            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#6cf7aa';
+    if(event.type == 'mouseover') {
+
+      switch(whichShipSelect) {
+        case 'shipTwoOne' :
+          (shipTwoOne == 1) ? vertical() : garizontal();
+          break;
+
+        case 'shipTwoTwo' :
+          (shipTwoTwo == 1) ? vertical() : garizontal();
+          break;
+
+        case 'shipTwoThree' :
+          (shipTwoThree == 1) ? vertical() : garizontal();
+          break;
+      };
+      
+      function garizontal() {
+        if(checkEmptyTwo(x, y, whichShipSelect, arrUser)) {
+          if(y == 9) {
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
-        };
-      } else {
-        if(x == 0) {
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+          };
+
+          if(x == 0) {
+            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
+          } else { 
+            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
+          };
         } else {
-          document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#fd344fc2';
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+          if(y == 9) {
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+          };
+
+          if(x == 0) {
+            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+          } else {
+            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+          };
+        };
+      };
+      
+      function vertical() {
+        if(checkEmptyTwo(x, y, whichShipSelect, arrUser)) {
+          if(x == 0) {
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
+          } else { 
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#6cf7aa';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
+          };
+        } else {
+          if(x == 0) {
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+          } else {
+            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#fd344fc2';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+          };
         };
       };
     };
 
-    if (event.type == 'mouseout') {
-      if(target.textContent == 0) {
-        if(x == 0) {
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
-        } else {
-          if(arrUser[x - 1][y] == 1) {
-            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+    if(event.type == 'mouseout') {
+
+      switch(whichShipSelect) {
+        case 'shipTwoOne' :
+          (shipTwoOne == 1) ? vertical() : garizontal();
+          break;
+
+        case 'shipTwoTwo' :
+          (shipTwoTwo == 1) ? vertical() : garizontal();
+          break;
+
+        case 'shipTwoThree' :
+          (shipTwoThree == 1) ? vertical() : garizontal();
+          break;
+      };
+      
+      function garizontal() {
+        if(arrUser[x][y] == 0) {
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
           } else {
-            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '';
-          };
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
         };
-      } else {
-        if(x == 0) {
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
-        } else {
-          if(arrUser[x - 1][y] == 1) {
-            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+
+        if(arrUser[x][y + 1] == 0) {
+            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '';
           } else {
-            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '';
+            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = 'white';
+        };
+      };
+      
+      function vertical() {
+        if(arrUser[x][y] == 0) {
+          if(x == 0) {
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
+          } else {
+            if(arrUser[x - 1][y] == 1) {
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+            } else {
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '';
+            };
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
           };
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+        } else {
+          if(x == 0) {
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+          } else {
+            if(arrUser[x - 1][y] == 1) {
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+            } else {
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '';
+            };
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+          };
         };
       };
     };
@@ -151,7 +233,7 @@ function handler(event) {
     let x = Number(idVal[0]);
     let y = Number(idVal[1]);
 
-    if (event.type == 'mouseover') {
+    if(event.type == 'mouseover') {
       if(checkEmptyOne(x, y, arrUser)) {
         target.style.background = '#6cf7aa';
       } else {
@@ -159,7 +241,7 @@ function handler(event) {
       };
     };
 
-    if (event.type == 'mouseout') {
+    if(event.type == 'mouseout') {
       if(target.textContent == 0) {
         target.style.background = ''
       } else {
@@ -174,7 +256,7 @@ function handler(event) {
     let x = Number(idVal[0]);
     let y = Number(idVal[1]);
 
-    if (event.type == 'mouseover') {
+    if(event.type == 'mouseover') {
       if(checkEmptyOne(x, y, arrUser)) {
         target.style.background = '#6cf7aa';
       } else {
@@ -182,7 +264,7 @@ function handler(event) {
       };
     };
 
-    if (event.type == 'mouseout') {
+    if(event.type == 'mouseout') {
       if(target.textContent == 0) {
         target.style.background = ''
       } else {
@@ -243,15 +325,54 @@ table.onclick = function(event) {
     if (target.tagName != 'TD') return false;
     
     if(arrUser[x][y] == 0) {
-
+      
       if(checkEmptyTwo(x, y, whichShipSelect, arrUser)) {
-        document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
-        document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
-
-        pushDelShipTwo(x, y, arrUser);
-
-        render();
-        return true;
+        switch(whichShipSelect) {
+          case 'shipTwoOne':
+            if(shipTwoOne == 1) {
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+              pushDelShipTwo(x, y, arrUser, shipTwoOne);
+              render();
+              return true;
+            } else {
+              document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = 'white';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+              pushDelShipTwo(x, y, arrUser, shipTwoOne);
+              render();
+              return true;
+            };
+      
+          case 'shipTwoTwo':
+            if(shipTwoTwo == 1) {
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+              pushDelShipTwo(x, y, arrUser, shipTwoTwo);
+              render();
+              return true;
+            } else {
+              document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = 'white';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+              pushDelShipTwo(x, y, arrUser,shipTwoTwo);
+              render();
+              return true;
+            };
+      
+          case 'shipTwoThree':
+            if(shipTwoThree == 1) {
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+              pushDelShipTwo(x, y, arrUser, shipTwoThree);
+              render();
+              return true;
+            } else {
+              document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = 'white';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+              pushDelShipTwo(x, y, arrUser, shipTwoThree);
+              render();
+              return true;
+            };
+        };
       } else {
         alert('The cage does not fit!');
         return false;
@@ -260,296 +381,362 @@ table.onclick = function(event) {
   };
 };
 
+function checkEmptyTree(x, y, val, arr) {};
+
+function checkEmptyFour(x, y, val, arr) {};
+
 function checkEmptyTwo(x, y, val, arr) {
   switch(val) {
     case 'shipTwoOne':
-      if(shipTwoOne = 1) {
+      if(shipTwoOne == 1) {
         return checkEmptyTwoVertical();
       } else {
-        checkEmptyTwoGorizont();
+        return checkEmptyTwoGorizont();
       };
-      break;
 
     case 'shipTwoTwo':
-      if(shipTwoTwo = 1) {
+      if(shipTwoTwo == 1) {
         return checkEmptyTwoVertical();
       } else {
-        checkEmptyTwoGorizont();
+        return checkEmptyTwoGorizont();
       };
-      break;
 
     case 'shipTwoThree':
-      if(shipTwoThree = 1) {
+      if(shipTwoThree == 1) {
         return checkEmptyTwoVertical();
       } else {
-        checkEmptyTwoGorizont();
+        return checkEmptyTwoGorizont();
       };
-      break;
-
-    case 'shipThreeOne':
-      if(shipThreeOne = 1) {
-        checkEmptyThreeVertical();
-      } else {
-        checkEmptyThreeGorizont();
-      };
-      break;
-
-    case 'shipThreeTwo':
-      if(shipThreeTwo = 1) {
-        checkEmptyThreeVertical();
-      } else {
-        checkEmptyThreeGorizont();
-      };
-      break;
-
-    case 'shipFourOne':
-      if(shipFourOne = 1) {
-        checkEmptyFourVertical();
-      } else {
-        checkEmptyFourGorizont();
-      };
-      break;
-
   };
 
   function checkEmptyTwoVertical() {
     if((x > 1 && y > 0) && (x < 8 && y < 9)) {
+      if(checkAll(x, y)) return true;
+    };
 
-      if(checkAll(x, y)) {
-        return true;
+    if(x == 0) return false;
+
+    if(x == 1) {
+      if(y == 0) {
+        if(checkOnexNully(x, y)) return true;
+        return false;
       };
-  
-    } else if(x == 1 || x == 0) {
 
-        if(x == 0) {
-          return false;
-        };
-  
-        if(y == 0) {
-          if(checkNullxNully(x, y)) return true;
-          return false;
-        };
-  
-        if(y == 9) {
-          if(checkNullxFully(x, y)) return true;
-          return false;
-        };
-  
-        if(checkNullxNumy(x, y)) return true;
+      if(y == 9) {
+        if(checkOnexFully(x, y)) return true;
         return false;
-  
-    } else if(x == 8 || x == 9) {
-        
-        if(y == 0) {
-          if(checkFullxNully(x, y)) return true;
-          return false;
-        };
-  
-        if(y == 9) {
-          if(checkFullxFully(x, y)) return true;
-          return false;
-        };
-  
-        if(checkFullxNumy(x, y)) return true;
+      };
+
+      if(checkOnexNumy(x, y)) return true;
+      return false;
+    };
+
+    if(x == 8 || x == 9) { 
+      if(y == 0) {
+        if(checkFullxNully(x, y)) return true;
         return false;
+      };
+
+      if(y == 9) {
+        if(checkFullxFully(x, y)) return true;
+        return false;
+      };
+
+      if(checkFullxNumy(x, y)) return true;
+      return false;
+    };
   
-    } else if(y == 0) {
-  
+    if(y == 0) {
       if(checkNumxNully(x, y)) return true;
       return false;
-  
-    } else if(y == 9) {
-  
+    };
+
+    if(y == 9) {
       if(checkNumxFully(x, y)) return true;
       return false;
+    };
+
+    function checkAll(x, y) {
+      if(arr[x - 2][y] != 0) return false;
+      if(arr[x - 2][y + 1] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x][y + 1] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y -1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 2][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
+    };
+
+    function checkOnexFully(x, y) {
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
+    };
+
+    function checkOnexNumy(x, y) {
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x][y + 1] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y -1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
+    };
+
+    function checkOnexNully(x, y) {
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x][y + 1] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
+    };
+
+    function checkFullxFully(x, y) {
+      if(arr[x - 2][y] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 2][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
+    };
   
+    function checkFullxFully(x, y) {
+      if(arr[x - 2][y] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 2][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
+    };
+  
+    function checkFullxNully(x, y) {
+      if(arr[x - 2][y] != 0) return false;
+      if(arr[x - 2][y + 1] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x][y + 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
+    };
+  
+    function checkFullxNumy(x, y) {
+      if(arr[x - 2][y] != 0) return false;
+      if(arr[x - 2][y + 1] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x][y + 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 2][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
+    };
+  
+    function checkNumxNully(x, y) {
+      if(arr[x - 2][y] != 0) return false;
+      if(arr[x - 2][y + 1] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x][y + 1] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
+    };
+  
+    function checkNumxFully(x, y) {
+      if(arr[x - 2][y] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 2][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      return true;
     };
   };
 
-  function checkAll(x, y) {
-    if(arr[x - 2][y] != 0) return false;
+  function checkEmptyTwoGorizont() {
+    if((x > 0 && y > 0) && (x < 9 && y < 8)) {
+      if(checkAll(x, y)) return true;
+    };
 
-    if(arr[x - 2][y + 1] != 0) return false;
+    if(x == 0) {
+      if(y == 0) {
+        if(checkNullxNully(x, y)) return true;
+        return false;
+      };
 
-    if(arr[x - 1][y + 1] != 0) return false;
+      if(y == 9) {
+        return false;
+      };
 
-    if(arr[x][y + 1] != 0) return false;
+      if(y == 8) {
+        if(checkNullxEighty(x, y)) return true;
+        return false;
+      };
 
-    if(arr[x + 1][y + 1] != 0) return false;
-
-    if(arr[x + 2][y + 1] != 0) return false;
+      if(checkNullxNumy(x, y)) return true;
+      return false;
+    };
     
-    if(arr[x + 2][y] != 0) return false;
+    if(x == 9) {
+      if(y == 0) {
+        if(checkFullxNully(x, y)) return true;
+        return false;
+      };
 
-    if(arr[x + 2][y - 1] != 0) return false;
+      if(y == 9) {
+        return false;
+      };
 
-    if(arr[x + 1][y - 1] != 0) return false;
+      if(y == 8) {
+        if(checkFullxEighty(x, y)) return true;
+        return false;
+      };
 
-    if(arr[x][y - 1] != 0) return false;
+      if(checkFullxNumy(x, y)) return true;
+      return false;
+    };
 
-    if(arr[x - 1][y - 1] != 0) return false;
-
-    if(arr[x - 2][y - 1] != 0) return false;
-
-    if(arr[x][y] == 1) return false;
-
-    if(arr[x - 1][y] == 1) return false;
-
-    return true;
-  };
-
-  function checkNullxNully(x, y) {
-    if(arr[x - 1][y + 1] != 0) return false;
-
-    if(arr[x][y + 1] != 0) return false;
-
-    if(arr[x + 1][y + 1] != 0) return false;
-
-    if(arr[x + 1][y] != 0) return false;
-
-    if(arr[x][y] == 1) return false;
-
-    if(arr[x - 1][y] == 1) return false;
-
-    return true;
-  };
-
-  function checkNullxFully(x, y) {
-    if(arr[x + 1][y] != 0) return false;
-
-    if(arr[x + 1][y - 1] != 0) return false;
-
-    if(arr[x][y - 1] != 0) return false;
-
-    if(arr[x - 1][y - 1] != 0) return false;
-
-    if(arr[x][y] == 1) return false;
-
-    if(arr[x - 1][y] == 1) return false;
-
-    return true;
-  };
-
-  function checkFullxFully(x, y) {
-    if(arr[x - 2][y] != 0) return false;
-
-    if(arr[x][y - 1] != 0) return false;
-
-    if(arr[x - 1][y - 1] != 0) return false;
-
-    if(arr[x - 2][y - 1] != 0) return false;
-
-    if(arr[x][y] == 1) return false;
-
-    if(arr[x - 1][y] == 1) return false;
-
-    return true;
-  };
-
-  function checkFullxNully(x, y) {
-    if(arr[x - 2][y] != 0) return false;
-
-    if(arr[x - 2][y + 1] != 0) return false;
-
-    if(arr[x - 1][y + 1] != 0) return false;
-
-    if(arr[x][y + 1] != 0) return false;
-
-    if(arr[x][y] == 1) return false;
-
-    if(arr[x - 1][y] == 1) return false;
-
-    return true;
-  };
-
-  function checkFullxNumy(x, y) {
-    if(arr[x - 2][y] != 0) return false;
-
-    if(arr[x - 2][y + 1] != 0) return false;
-
-    if(arr[x - 1][y + 1] != 0) return false;
-
-    if(arr[x][y + 1] != 0) return false;
-
-    if(arr[x][y - 1] != 0) return false;
-
-    if(arr[x - 1][y - 1] != 0) return false;
+    if(y == 8) { 
+      if(checkNumxEighty(x, y)) return true;
+      return false;
+    };
     
-    if(arr[x - 2][y - 1] != 0) return false;
+    if(y == 0) {
+      if(checkNumxNully(x, y)) return true;
+      return false;
+    };
+    
+    if(y == 9) {
+      return false;
+    };
 
-    if(arr[x][y] == 1) return false;
+    function checkAll(x, y) {
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x][y + 2] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      return true;
+    };
 
-    if(arr[x - 1][y] == 1) return false;
+    function checkNullxEighty(x, y) {
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      return true;
+    };
 
-    return true;
-  };
+    function checkFullxEighty(x, y) {
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      return true;
+    };
 
-  function checkNullxNumy(x, y) {
-    if(arr[x - 1][y + 1] != 0) return false;
-
-    if(arr[x][y + 1] != 0) return false;
-
-    if(arr[x + 1][y + 1] != 0) return false;
-
-    if(arr[x + 1][y] != 0) return false;
-
-    if(arr[x + 1][y - 1] != 0) return false;
-
-    if(arr[x][y - 1] != 0) return false;
-
-    if(arr[x - 1][y - 1] != 0) return false;
-
-    if(arr[x][y] == 1) return false;
-
-    if(arr[x - 1][y] == 1) return false;
-
-    return true;
-  };
-
-  function checkNumxNully(x, y) {
-    if(arr[x - 2][y] != 0) return false;
-
-    if(arr[x - 2][y + 1] != 0) return false;
-
-    if(arr[x - 1][y + 1] != 0) return false;
-
-    if(arr[x][y + 1] != 0) return false;
-
-    if(arr[x + 1][y + 1] != 0) return false;
-
-    if(arr[x + 1][y] != 0) return false;
-
-    if(arr[x][y] == 1) return false;
-
-    if(arr[x - 1][y] == 1) return false;
-
-    return true;
-  };
-
-  function checkNumxFully(x, y) {
-    if(arr[x - 2][y] != 0) return false;
-
-    if(arr[x + 1][y] != 0) return false;
-
-    if(arr[x + 1][y - 1] != 0) return false;
-
-    if(arr[x][y - 1] != 0) return false;
-
-    if(arr[x - 1][y - 1] != 0) return false;
-
-    if(arr[x - 2][y - 1] != 0) return false;
-
-    if(arr[x][y] == 1) return false;
-
-    if(arr[x - 1][y] == 1) return false;
-
-    return true;
+    function checkNumxEighty(x, y) {
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x][y + 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      return true;
+    };
+  
+    function checkNullxNully(x, y) {
+      if(arr[x][y + 2] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      return true;
+    };
+  
+    function checkFullxNully(x, y) {
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x][y + 2] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      return true;
+    };
+  
+    function checkFullxNumy(x, y) {
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x][y + 2] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      return true;
+    };
+  
+    function checkNullxNumy(x, y) {
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x][y + 2] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      return true;
+    };
+  
+    function checkNumxNully(x, y) {
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x][y + 2] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      return true;
+    };
   };
 };
-
-function checkEmptyTree(arr) {};
-
-function checkEmptyFour(arr) {};
 
 function checkEmptyOne(x, y, arr) {
   
