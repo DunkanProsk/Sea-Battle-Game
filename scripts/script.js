@@ -19,7 +19,6 @@ let arrUser = [],
 
 let table = document.getElementById('table__one');
 table.onmouseover = table.onmouseout = handler;
-
 let ships = document.getElementById('ship__tabel');
 let buttonReset = document.getElementById('buttonReset');
 let divShips = document.getElementById('ship__value').innerHTML;
@@ -425,7 +424,7 @@ function handler(event) {
       (shipFourOne == 1) ? vertical() : garizontal();
       
       function garizontal() {
-        if(checkEmptyFour(x, y, whichShipSelect, arrUser)) {
+        if(checkEmptyFour(x, y, arrUser)) {
           if(y == 9) {
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
           };
@@ -453,10 +452,13 @@ function handler(event) {
       };
       
       function vertical() {
-        if(checkEmptyFour(x, y, whichShipSelect, arrUser)) {
+        if(checkEmptyFour(x, y, arrUser)) {
           if(x == 0) {
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
           } else if(x == 1) {
+            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
+          } else if(x == 2) {
             document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = '#6cf7aa';
             document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#6cf7aa';
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
@@ -470,9 +472,12 @@ function handler(event) {
           if(x == 0) {
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
           } else if(x == 1) {
-            document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = '#fd344fc2';
             document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#fd344fc2';
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+          } else if(x == 2) {
+              document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
           } else {
             document.getElementById(`${x - 3} - ${y}`).style.backgroundColor = '#fd344fc2';
             document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = '#fd344fc2';
@@ -511,7 +516,22 @@ function handler(event) {
               document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '';
             };
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
+          } else if(x == 2) {
+            if(arrUser[x - 1][y] == 1) {
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+            } else {
+              document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '';
+            };
+
+            if(arrUser[x - 2][y] == 1) {
+              document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = 'white';
+            } else {
+              document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = '';
+            };
+
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
           } else {
+
             if(arrUser[x - 1][y] == 1) {
               document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
             } else {
@@ -538,7 +558,12 @@ function handler(event) {
           } else if(x == 1) {
             document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
             document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+          } else if(x == 2) {
+            document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = 'white';
+            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
           } else {
+            
             if(arrUser[x - 1][y] == 1) {
               document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
             } else {
@@ -733,33 +758,33 @@ table.onclick = function(event) {
     if (target.tagName != 'TD') return false;
     
     if(arrUser[x][y] == 0) {
-      if(checkEmptyFour(x, y, whichShipSelect, arrUser)) {
-          if(shipFourOne == 1) {
-            document.getElementById(`${x} - ${y + 3}`).style.backgroundColor = 'white';
-            document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = 'white';
-            document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
-            document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
-            pushDelShipFour(x, y, arrUser, shipFourOne);
-            render();
-            return true;
-          } else {
-            document.getElementById(`${x} - ${y + 3}`).style.backgroundColor = 'white';
-            document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = 'white';
-            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = 'white';
-            document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
-            pushDelShipFour(x, y, arrUser, shipFourOne);
-            render();
-            return true;
-          };
+      if(checkEmptyFour(x, y, arrUser)) {
+        if(shipFourOne == 1) {
+          document.getElementById(`${x - 3} - ${y}`).style.backgroundColor = 'white';
+          document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = 'white';
+          document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = 'white';
+          document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+          pushDelShipFour(x, y, arrUser, shipFourOne);
+          render();
+          return true;
+        } else {
+          document.getElementById(`${x} - ${y + 3}`).style.backgroundColor = 'white';
+          document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = 'white';
+          document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = 'white';
+          document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+          pushDelShipFour(x, y, arrUser, shipFourOne);
+          render();
+          return true;
         };
-    } else {
-      alert('The cage does not fit!');
-      return false;
-    };
+      } else {
+        alert('The cage does not fit!');
+        return false;
+      };
+    } return false;
   };
 };
 
-function checkEmptyFour(x, y, val, arr) {
+function checkEmptyFour(x, y, arr) {
   
   if(shipFourOne == 1) {
     return checkEmptyFourVertical();
@@ -778,16 +803,16 @@ function checkEmptyFour(x, y, val, arr) {
 
     if(x == 3) {
       if(y == 0) {
-        if(checkTwoxNully(x, y)) return true;
+        if(checkThreexNully(x, y)) return true;
         return false;
       };
 
       if(y == 9) {
-        if(checkTwoxFully(x, y)) return true;
+        if(checkThreexFully(x, y)) return true;
         return false;
       };
 
-      if(checkTwoxNumy(x, y)) return true;
+      if(checkThreexNumy(x, y)) return true;
       return false;
     };
 
@@ -838,35 +863,8 @@ function checkEmptyFour(x, y, val, arr) {
       return true;
     };
 
-    function checkTwoxFully(x, y) {
-      if(arr[x - 2][y - 1] != 0) return false;
-      if(arr[x - 1][y - 1] != 0) return false;
-      if(arr[x][y - 1] != 0) return false;
-      if(arr[x + 1][y - 1] != 0) return false;
-      if(arr[x + 1][y] != 0) return false;
-      if(arr[x][y] == 1) return false;
-      if(arr[x - 1][y] == 1) return false;
-      if(arr[x - 2][y] == 1) return false;
-      return true;
-    };
-
-    function checkTwoxNumy(x, y) {
-      if(arr[x - 2][y + 1] != 0) return false;
-      if(arr[x - 1][y + 1] != 0) return false;
-      if(arr[x][y + 1] != 0) return false;
-      if(arr[x + 1][y + 1] != 0) return false;
-      if(arr[x + 1][y] != 0) return false;
-      if(arr[x + 1][y - 1] != 0) return false;
-      if(arr[x][y - 1] != 0) return false;
-      if(arr[x - 1][y - 1] != 0) return false;
-      if(arr[x - 2][y - 1] != 0) return false;
-      if(arr[x][y] == 1) return false;
-      if(arr[x - 1][y] == 1) return false;
-      if(arr[x - 2][y] == 1) return false;
-      return true;
-    };
-
-    function checkTwoxNully(x, y) {
+    function checkThreexNully(x, y) {
+      if(arr[x - 3][y + 1] != 0) return false;
       if(arr[x - 2][y + 1] != 0) return false;
       if(arr[x - 1][y + 1] != 0) return false;
       if(arr[x][y + 1] != 0) return false;
@@ -875,11 +873,46 @@ function checkEmptyFour(x, y, val, arr) {
       if(arr[x][y] == 1) return false;
       if(arr[x - 1][y] == 1) return false;
       if(arr[x - 2][y] == 1) return false;
+      if(arr[x - 3][y] == 1) return false;
+      return true;
+    };
+
+    function checkThreexFully(x, y) {
+      if(arr[x - 3][y - 1] != 0) return false;
+      if(arr[x - 2][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 2][y] == 1) return false;
+      if(arr[x - 3][y] == 1) return false;
+      return true;
+    };
+
+    function checkThreexNumy(x, y) {
+      if(arr[x - 3][y + 1] != 0) return false;
+      if(arr[x - 2][y + 1] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x][y + 1] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x - 3][y - 1] != 0) return false;
+      if(arr[x - 2][y - 1] != 0) return false;
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 2][y] == 1) return false;
+      if(arr[x - 3][y] == 1) return false;
       return true;
     };
 
     function checkFullxFully(x, y) {
-      if(arr[x - 3][y] != 0) return false;
+      if(arr[x - 4][y] != 0) return false;
+      if(arr[x - 3][y - 1] != 0) return false;
       if(arr[x - 3][y - 1] != 0) return false;
       if(arr[x - 2][y - 1] != 0) return false;
       if(arr[x - 1][y - 1] != 0) return false;
@@ -887,11 +920,13 @@ function checkEmptyFour(x, y, val, arr) {
       if(arr[x][y] == 1) return false;
       if(arr[x - 1][y] == 1) return false;
       if(arr[x - 2][y] == 1) return false;
+      if(arr[x - 3][y] == 1) return false;
       return true;
     };
   
     function checkFullxNully(x, y) {
-      if(arr[x - 3][y] != 0) return false;
+      if(arr[x - 4][y] != 0) return false;
+      if(arr[x - 3][y + 1] != 0) return false;
       if(arr[x - 3][y + 1] != 0) return false;
       if(arr[x - 2][y + 1] != 0) return false;
       if(arr[x - 1][y + 1] != 0) return false;
@@ -899,15 +934,18 @@ function checkEmptyFour(x, y, val, arr) {
       if(arr[x][y] == 1) return false;
       if(arr[x - 1][y] == 1) return false;
       if(arr[x - 2][y] == 1) return false;
+      if(arr[x - 3][y] == 1) return false;
       return true;
     };
   
     function checkFullxNumy(x, y) {
-      if(arr[x - 3][y] != 0) return false;
+      if(arr[x - 3][y - 1] != 0) return false;
       if(arr[x - 3][y - 1] != 0) return false;
       if(arr[x - 2][y - 1] != 0) return false;
       if(arr[x - 1][y - 1] != 0) return false;
-      if(arr[x - 3][y] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x - 4][y] != 0) return false;
+      if(arr[x - 3][y + 1] != 0) return false;
       if(arr[x - 3][y + 1] != 0) return false;
       if(arr[x - 2][y + 1] != 0) return false;
       if(arr[x - 1][y + 1] != 0) return false;
@@ -915,11 +953,13 @@ function checkEmptyFour(x, y, val, arr) {
       if(arr[x][y] == 1) return false;
       if(arr[x - 1][y] == 1) return false;
       if(arr[x - 2][y] == 1) return false;
+      if(arr[x - 3][y] == 1) return false;
       return true;
     };
   
     function checkNumxNully(x, y) {
-      if(arr[x - 3][y] != 0) return false;
+      if(arr[x - 4][y] != 0) return false;
+      if(arr[x - 3][y + 1] != 0) return false;
       if(arr[x - 3][y + 1] != 0) return false;
       if(arr[x - 2][y + 1] != 0) return false;
       if(arr[x - 1][y + 1] != 0) return false;
@@ -929,11 +969,13 @@ function checkEmptyFour(x, y, val, arr) {
       if(arr[x][y] == 1) return false;
       if(arr[x - 1][y] == 1) return false;
       if(arr[x - 2][y] == 1) return false;
+      if(arr[x - 3][y] == 1) return false;
       return true;
     };
   
     function checkNumxFully(x, y) {
-      if(arr[x - 3][y] != 0) return false;
+      if(arr[x - 4][y] != 0) return false;
+      if(arr[x - 3][y - 1] != 0) return false;
       if(arr[x - 3][y - 1] != 0) return false;
       if(arr[x - 2][y - 1] != 0) return false;
       if(arr[x - 1][y - 1] != 0) return false;
@@ -943,6 +985,7 @@ function checkEmptyFour(x, y, val, arr) {
       if(arr[x][y] == 1) return false;
       if(arr[x - 1][y] == 1) return false;
       if(arr[x - 2][y] == 1) return false;
+      if(arr[x - 3][y] == 1) return false;
       return true;
     };
   };
