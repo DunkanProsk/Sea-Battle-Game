@@ -16,12 +16,13 @@ let arrUser = [],
     shipThreeTwo = 1,
     shipFourOne = 1,
     whichShipSelect = '',
-    pressAuto = 0;
+    valueShips = 10;
 
 let table = document.getElementById('table__one');
 table.onmouseover = table.onmouseout = handler;
 let ships = document.getElementById('ship__tabel');
 let buttonReset = document.getElementById('buttonReset');
+let buttonStart = document.getElementById('buttonStart');
 let buttonAuto = document.getElementById('buttonAuto');
 let divShips = document.getElementById('ship__value').innerHTML;
 
@@ -42,7 +43,8 @@ function pushAutoShips() {
   let one = 4,
       two = 3,
       three = 2,
-      four = 1;
+      four = 1,
+      val = 1;
 
   function Num() {
     return Math.floor(Math.random() * (9 - 0 + 1)) + 0;
@@ -50,8 +52,7 @@ function pushAutoShips() {
 
   function pushShips(arr) {
     let x = Num(),
-        y = Num(),
-        val = 1;
+        y = Num();
 
     if(four != 0) {
       if(arr[x][y] == 0) {
@@ -115,6 +116,17 @@ function pushDelShip(x, y, arrPush) {
   arrPush[x][y] = 1;
   checkGetShip == 0;
   render();
+  --valueShips;
+  if(valueShips == 0) {
+    document.getElementById("buttonStart").style.visibility = 'visible';
+    document.getElementById("buttonStart").animate([
+      { margin: '-80px' }, 
+      { margin: '50px' }
+    ], {
+      duration: 300,
+      iterations: 1,
+    });
+  };
 };
 
 function pushDelShipTwo(x, y, arrPush, val) {
@@ -130,6 +142,18 @@ function pushDelShipTwo(x, y, arrPush, val) {
     
     checkGetShip == 0;
     render();
+  };
+
+  --valueShips;
+  if(valueShips == 0) {
+    document.getElementById("buttonStart").style.visibility = 'visible';
+    document.getElementById("buttonStart").animate([
+      { margin: '-80px' }, 
+      { margin: '50px' }
+    ], {
+      duration: 300,
+      iterations: 1,
+    });
   };
 };
 
@@ -148,6 +172,18 @@ function pushDelShipThree(x, y, arrPush, val) {
     
     checkGetShip == 0;
     render();
+  };
+
+  --valueShips;
+  if(valueShips == 0) {
+    document.getElementById("buttonStart").style.visibility = 'visible';
+    document.getElementById("buttonStart").animate([
+      { margin: '-80px' }, 
+      { margin: '50px' }
+    ], {
+      duration: 300,
+      iterations: 1,
+    });
   };
 };
 
@@ -168,6 +204,18 @@ function pushDelShipFour(x, y, arrPush, val) {
     
     checkGetShip == 0;
     render();
+  };
+
+  --valueShips;
+  if(valueShips == 0) {
+    document.getElementById("buttonStart").style.visibility = 'visible';
+    document.getElementById("buttonStart").animate([
+      { margin: '-80px' }, 
+      { margin: '50px' }
+    ], {
+      duration: 300,
+      iterations: 1,
+    });
   };
 };
 
@@ -2568,6 +2616,7 @@ buttonReset.onclick = function(event) {
 
   pushArr(arrUser);
   render();
+  buttonStart.style.visibility = '';
 };
 
 buttonAuto.onclick = function(event) {
@@ -2575,6 +2624,9 @@ buttonAuto.onclick = function(event) {
     <div id="ship__flex">
     </div>
   `;
+
+  pushArr(arrUser);
+  render();
 
   shipTwoOne = 1;
   shipTwoTwo = 1;
@@ -2588,4 +2640,13 @@ buttonAuto.onclick = function(event) {
   
   pushAutoShips();
   render();
+
+  document.getElementById("buttonStart").style.visibility = 'visible';
+  document.getElementById("buttonStart").animate([
+    { margin: '-80px' }, 
+    { margin: '50px' }
+  ], {
+    duration: 300,
+    iterations: 1,
+  });
 };
