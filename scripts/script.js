@@ -464,24 +464,73 @@ function handler(event) {
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
           };
 
-          if(x == 0) {
+          if(y == 8) {
             document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#6cf7aa';
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
-          } else { 
+          };
+
+          if(y == 7) {
+            document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
+          };
+
+          if(x == 0) {
+            document.getElementById(`${x} - ${y + 3}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
+          } else {
+            document.getElementById(`${x} - ${y + 3}`).style.backgroundColor = '#6cf7aa';
+            document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = '#6cf7aa';
             document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#6cf7aa';
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '#6cf7aa';
           };
         } else {
-          if(y == 9) {
-            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
-          };
-
           if(x == 0) {
-            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
-            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            if(y != 9 && y != 8 && y != 7) {
+              document.getElementById(`${x} - ${y + 3}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            };
+
+            if (y == 9) {
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            };
+            
+            if (y == 8) {
+              document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            };
+            
+            if (y == 7) {
+              document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            };
           } else {
-            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
-            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            if(y != 9 && y != 8 && y != 7) {
+              document.getElementById(`${x} - ${y + 3}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            };
+            
+            if(y == 9) {
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            }
+            
+            if(y == 8) {
+              document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            };
+
+            if(y == 7) {
+              document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+              document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+            };
           };
         };
       };
@@ -528,15 +577,33 @@ function handler(event) {
       
       function garizontal() {
         if(arrUser[x][y] == 0) {
-            document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
-          } else {
-            document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
+          document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
+        } else {
+          document.getElementById(`${x} - ${y}`).style.backgroundColor = 'white';
         };
 
         if(arrUser[x][y + 1] == 0) {
-            document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '';
-          } else {
+          document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '';
+        } else {
+          if(y != 9) {
             document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = 'white';
+          };
+        };
+
+        if(arrUser[x][y + 2] == 0) {
+          document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = '';
+        } else {
+          if(y != 9 && y != 8) {
+            document.getElementById(`${x} - ${y + 2}`).style.backgroundColor = 'white';
+          };
+        };
+
+        if(arrUser[x][y + 3] == 0) {
+          document.getElementById(`${x} - ${y + 3}`).style.backgroundColor = '';
+        } else {
+          if(y != 9 && y != 8 && y != 7) {
+            document.getElementById(`${x} - ${y + 3}`).style.backgroundColor = 'white';
+          };
         };
       };
       
@@ -1021,6 +1088,233 @@ function checkEmptyFour(x, y, arr) {
       if(arr[x - 1][y] == 1) return false;
       if(arr[x - 2][y] == 1) return false;
       if(arr[x - 3][y] == 1) return false;
+      return true;
+    };
+  };
+
+  function checkEmptyFourGorizont() {
+    if((x > 0 && y > 0) && (x < 9 && y < 6)) {
+      if(checkAll(x, y)) return true;
+    };
+
+    if(x == 0) {
+      if(y == 0) {
+        if(checkNullxNully(x, y)) return true;
+        return false;
+      };
+
+      if(y == 9) {
+        return false;
+      };
+
+      if(y == 8) {
+        return false;
+      };
+
+      if(y == 7) {
+        return false;
+      };
+
+      if(y == 6) {
+        if(checkNullxSixy(x, y)) return true;
+        return false;
+      };
+
+      if(checkNullxNumy(x, y)) return true;
+      return false;
+    };
+    
+    if(x == 9) {
+      if(y == 0) {
+        if(checkFullxNully(x, y)) return true;
+        return false;
+      };
+
+      if(y == 9) {
+        return false;
+      };
+
+      if(y == 8) {
+        return false;
+      };
+
+      if(y == 7) {
+        return false;
+      };
+
+      if(y == 6) {
+        if(checkFullxSixy(x, y)) return true;
+        return false;
+      };
+
+      if(checkFullxNumy(x, y)) return true;
+      return false;
+    };
+
+    if(y == 0) {
+      if(checkNumxNully(x, y)) return true;
+      return false;
+    };
+
+    if(y == 6) {
+      if(checkNumxSixy(x, y)) return true;
+      return false;
+    };
+
+    if(y == 7) { 
+      return false;
+    };
+
+    if(y == 8) { 
+      return false;
+    };
+    
+    if(y == 9) {
+      return false;
+    };
+
+    function checkAll(x, y) {
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x - 1][y + 3] != 0) return false;
+      if(arr[x - 1][y + 4] != 0) return false;
+      if(arr[x][y + 4] != 0) return false;
+      if(arr[x + 1][y + 4] != 0) return false;
+      if(arr[x + 1][y + 3] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x][y + 2] == 1) return false;
+      if(arr[x][y + 3] == 1) return false;
+      return true;
+    };
+
+    function checkNullxSixy(x, y) {
+      if(arr[x + 1][y + 3] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x][y + 2] == 1) return false;
+      if(arr[x][y + 3] == 1) return false;
+      return true;
+    };
+
+    function checkFullxSixy(x, y) {
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x - 1][y + 3] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x][y + 2] == 1) return false;
+      if(arr[x][y + 3] == 1) return false;
+      return true;
+    };
+
+    function checkNumxSixy(x, y) {
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x - 1][y + 3] != 0) return false;
+      if(arr[x + 1][y + 3] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x][y + 2] == 1) return false;
+      if(arr[x][y + 3] == 1) return false;
+      return true;
+    };
+
+    function checkNumxNully(x, y) {
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x - 1][y + 3] != 0) return false;
+      if(arr[x][y + 3] != 0) return false;
+      if(arr[x + 1][y + 3] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x][y + 2] == 1) return false;
+      return true;
+    };
+  
+    function checkNullxNully(x, y) {
+      if(arr[x][y + 4] != 0) return false;
+      if(arr[x + 1][y + 4] != 0) return false;
+      if(arr[x + 1][y + 3] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x][y + 2] == 1) return false;
+      if(arr[x][y + 3] == 1) return false;
+      return true;
+    };
+  
+    function checkFullxNully(x, y) {
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x - 1][y + 3] != 0) return false;
+      if(arr[x - 1][y + 4] != 0) return false;
+      if(arr[x][y + 4] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x][y + 2] == 1) return false;
+      if(arr[x][y + 3] == 1) return false;
+      return true;
+    };
+  
+    function checkFullxNumy(x, y) {
+      if(arr[x - 1][y - 1] != 0) return false;
+      if(arr[x - 1][y] != 0) return false;
+      if(arr[x - 1][y + 1] != 0) return false;
+      if(arr[x - 1][y + 2] != 0) return false;
+      if(arr[x - 1][y + 3] != 0) return false;
+      if(arr[x - 1][y + 4] != 0) return false;
+      if(arr[x][y + 4] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x][y + 2] == 1) return false;
+      if(arr[x][y + 3] == 1) return false;
+      return true;
+    };
+  
+    function checkNullxNumy(x, y) {
+      if(arr[x][y + 4] != 0) return false;
+      if(arr[x + 1][y + 4] != 0) return false;
+      if(arr[x + 1][y + 3] != 0) return false;
+      if(arr[x + 1][y + 2] != 0) return false;
+      if(arr[x + 1][y + 1] != 0) return false;
+      if(arr[x + 1][y] != 0) return false;
+      if(arr[x + 1][y - 1] != 0) return false;
+      if(arr[x][y - 1] != 0) return false;
+      if(arr[x][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x][y + 2] == 1) return false;
+      if(arr[x][y + 3] == 1) return false;
       return true;
     };
   };
