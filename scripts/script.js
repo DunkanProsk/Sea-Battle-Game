@@ -19,14 +19,16 @@ let arrUser = [],
     valueShips = 10;
 
 let table = document.getElementById('table__one');
-table.onmouseover = table.onmouseout = handler;
+let tableAi = document.getElementById('table__two');
 let ships = document.getElementById('ship__tabel');
 let buttonReset = document.getElementById('buttonReset');
 let buttonStart = document.getElementById('buttonStart');
 let buttonAuto = document.getElementById('buttonAuto');
 let divShips = document.getElementById('ship__value').innerHTML;
+table.onmouseover = table.onmouseout = handler;
 
 pushArr(arrUser);
+pushArr(arrAi);
 
 function pushArr(arr) {
   for(let i = 0; i < 10; i++){
@@ -39,7 +41,7 @@ function pushArr(arr) {
   return arr;
 };
 
-function pushAutoShips() {
+function pushAutoShips(arr) {
   let one = 4,
       two = 3,
       three = 2,
@@ -59,48 +61,48 @@ function pushAutoShips() {
         if(checkEmptyFour(x, y, arr)) {
           pushDelShipFour(x, y, arr, val);
           --four;
-          pushShips(arrUser);
+          pushShips(arr);
         } else {
-          pushShips(arrUser);
+          pushShips(arr);
         };
       } else {
-        pushShips(arrUser);
+        pushShips(arr);
       };
     } else if(three != 0) {
       if(arr[x][y] == 0) {
         if(checkEmptyThree(x, y, 'shipThreeOne', arr)) {
           pushDelShipThree(x, y, arr, val);
           --three;
-          pushShips(arrUser);
+          pushShips(arr);
         } else {
-          pushShips(arrUser)
+          pushShips(arr)
         };
       } else {
-        pushShips(arrUser);
+        pushShips(arr);
       };
     } else if(two != 0) {
       if(arr[x][y] == 0) {
         if(checkEmptyTwo(x, y, 'shipTwoOne', arr)) {
           pushDelShipTwo(x, y, arr, val);
           --two;
-          pushShips(arrUser);
+          pushShips(arr);
         } else {
-          pushShips(arrUser)
+          pushShips(arr)
         };
       } else {
-        pushShips(arrUser);
+        pushShips(arr);
       };
     } else if(one != 0) {
       if(arr[x][y] == 0) {
         if(checkEmptyOne(x, y, arr)) {
           pushDelShip(x, y, arr);
           --one;
-          pushShips(arrUser);
+          pushShips(arr);
         } else {
-          pushShips(arrUser)
+          pushShips(arr)
         };
       } else {
-        pushShips(arrUser);
+        pushShips(arr);
       };
     } else {
       return false;
@@ -109,7 +111,7 @@ function pushAutoShips() {
     return true;
   };
 
-  return pushShips(arrUser); 
+  return pushShips(arr); 
 };
 
 function pushDelShip(x, y, arrPush) {
@@ -834,7 +836,12 @@ table.onclick = function(event) {
     if(createNewShipFourOnTabel()) return checkGetShip = 0;
   };
 
-  if(checkGetShip == 0) return alert('Choose a ship!');
+  if(checkGetShip == 0) {
+    if(valueShips == 0) {
+      return alert('Ships are over!');
+    };
+    return alert('Choose a ship!');
+  };
   
   function createNewShipOnTabel() {
     let target = event.target;
@@ -1042,7 +1049,7 @@ function checkEmptyFour(x, y, arr) {
       return false;
     };
 
-    if(x == 8 || x == 9) { 
+    if(x == 9) { 
       if(y == 0) {
         if(checkFullxNully(x, y)) return true;
         return false;
@@ -1484,7 +1491,7 @@ function checkEmptyThree(x, y, val, arr) {
       return false;
     };
 
-    if(x == 8 || x == 9) { 
+    if(x == 9) { 
       if(y == 0) {
         if(checkFullxNully(x, y)) return true;
         return false;
@@ -1860,7 +1867,7 @@ function checkEmptyTwo(x, y, val, arr) {
   };
 
   function checkEmptyTwoVertical() {
-    if((x > 1 && y > 0) && (x < 8 && y < 9)) {
+    if((x > 1 && y > 0) && (x < 9 && y < 9)) {
       if(checkAll(x, y)) return true;
     };
 
@@ -1881,7 +1888,7 @@ function checkEmptyTwo(x, y, val, arr) {
       return false;
     };
 
-    if(x == 8 || x == 9) { 
+    if(x == 9) { 
       if(y == 0) {
         if(checkFullxNully(x, y)) return true;
         return false;
@@ -2611,7 +2618,7 @@ buttonReset.onclick = function(event) {
   shipThreeOne = 1;
   shipThreeTwo = 1;
   shipFourOne = 1;
-
+  valueShips = 10;
   checkGetShip = 0;
 
   pushArr(arrUser);
@@ -2638,7 +2645,7 @@ buttonAuto.onclick = function(event) {
   checkGetShip = 0;
   pressAuto = 1;
   
-  pushAutoShips();
+  pushAutoShips(arrUser);
   render();
 
   document.getElementById("buttonStart").style.visibility = 'visible';
@@ -2649,4 +2656,69 @@ buttonAuto.onclick = function(event) {
     duration: 300,
     iterations: 1,
   });
+};
+
+buttonStart.onclick = (event) => {startGame()};
+
+function startGame() {
+  let val = 0;
+  let allValShip = 20;
+  pushAutoShips(arrAi);
+
+  console.log(arrAi);
+  alert('Fire!');
+
+  table.onclick = () => {
+    alert('Dont shoot yourself!');
+  };
+  
+  tableAi.onclick = function(event) {
+      let target = event.target;
+      let idVal = target.id.split(' / ');
+      let x = Number(idVal[0]);
+      let y = Number(idVal[1]);
+  
+      if (target.tagName != 'TD') return false;
+      
+      if(val == 0) {
+        if(arrAi[x][y] == 1) {
+          --allValShip;
+          alert('Hit!');
+          target.textContent = '1';
+          target.style.backgroundColor = '#6cf7aa';
+          val = 1;
+          if(allValShip == 0) {
+            alert('You win!');
+            location.reload();
+          };
+          Ai();
+        } else {
+          alert('Past!');
+          target.textContent = '-';
+          target.style.backgroundColor = 'white';
+          val = 1;
+          Ai();
+        };
+      };
+
+      function Ai() {
+        let x = Num();
+        let y = Num();
+
+        if(arrUser[x][y] == 1) {
+          alert('AI hit you!');
+          document.getElementById(`${x} - ${y}`).textContent = 'X';
+          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+          val = 0;
+        } else {
+          alert('AI missed!');
+          document.getElementById(`${x} - ${y}`).textContent = '-';
+          val = 0;
+        };
+      };
+
+      function Num() {
+        return Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+      };
+  };
 };
