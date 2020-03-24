@@ -479,12 +479,10 @@ function handler(event) {
               document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#fd344fc2';
               document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
           } else {
-            if(document.getElementById(`${x - 3} - ${y}`) != null) {
               document.getElementById(`${x - 3} - ${y}`).style.backgroundColor = '#fd344fc2';
               document.getElementById(`${x - 2} - ${y}`).style.backgroundColor = '#fd344fc2';
               document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#fd344fc2';
               document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
-            };
           };
         };
       };
@@ -509,7 +507,6 @@ function handler(event) {
       
       function vertical() {
         if(arrUser[x][y] == 0) {
-          consolw.log(arrUser[x][y] == 0);
           if(x == 0) {
             document.getElementById(`${x} - ${y}`).style.backgroundColor = '';
           } else if(x == 1) {
