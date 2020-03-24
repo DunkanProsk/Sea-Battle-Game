@@ -15,12 +15,14 @@ let arrUser = [],
     shipThreeOne = 1,
     shipThreeTwo = 1,
     shipFourOne = 1,
-    whichShipSelect = '';
+    whichShipSelect = '',
+    pressAuto = 0;
 
 let table = document.getElementById('table__one');
 table.onmouseover = table.onmouseout = handler;
 let ships = document.getElementById('ship__tabel');
 let buttonReset = document.getElementById('buttonReset');
+let buttonAuto = document.getElementById('buttonAuto');
 let divShips = document.getElementById('ship__value').innerHTML;
 
 pushArr(arrUser);
@@ -34,6 +36,79 @@ function pushArr(arr) {
   };
 
   return arr;
+};
+
+function pushAutoShips() {
+  let one = 4,
+      two = 3,
+      three = 2,
+      four = 1;
+
+  function Num() {
+    return Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+  };
+
+  function pushShips(arr) {
+    let x = Num(),
+        y = Num(),
+        val = 1;
+
+    if(four != 0) {
+      if(arr[x][y] == 0) {
+        if(checkEmptyFour(x, y, arr)) {
+          pushDelShipFour(x, y, arr, val);
+          --four;
+          pushShips(arrUser);
+        } else {
+          pushShips(arrUser);
+        };
+      } else {
+        pushShips(arrUser);
+      };
+    } else if(three != 0) {
+      if(arr[x][y] == 0) {
+        if(checkEmptyThree(x, y, 'shipThreeOne', arr)) {
+          pushDelShipThree(x, y, arr, val);
+          --three;
+          pushShips(arrUser);
+        } else {
+          pushShips(arrUser)
+        };
+      } else {
+        pushShips(arrUser);
+      };
+    } else if(two != 0) {
+      if(arr[x][y] == 0) {
+        if(checkEmptyTwo(x, y, 'shipTwoOne', arr)) {
+          pushDelShipTwo(x, y, arr, val);
+          --two;
+          pushShips(arrUser);
+        } else {
+          pushShips(arrUser)
+        };
+      } else {
+        pushShips(arrUser);
+      };
+    } else if(one != 0) {
+      if(arr[x][y] == 0) {
+        if(checkEmptyOne(x, y, arr)) {
+          pushDelShip(x, y, arr);
+          --one;
+          pushShips(arrUser);
+        } else {
+          pushShips(arrUser)
+        };
+      } else {
+        pushShips(arrUser);
+      };
+    } else {
+      return false;
+    };
+    
+    return true;
+  };
+
+  return pushShips(arrUser); 
 };
 
 function pushDelShip(x, y, arrPush) {
@@ -102,6 +177,7 @@ function render() {
       for (var j = 0; j < 10; j++) {
         if(arr[i][j] == 1) {
           document.getElementById(`${i} - ${j}`).textContent = '1';
+          document.getElementById(`${i} - ${j}`).style.backgroundColor = 'white';
         } else {
           document.getElementById(`${i} - ${j}`).textContent = '0';
           document.getElementById(`${i} - ${j}`).style.backgroundColor = '#4b77a8';
@@ -2452,8 +2528,6 @@ ships.onclick = function(event) {
 };
 
 buttonReset.onclick = function(event) {
-  ships.innerHTML = '';
-  
   ships.innerHTML = `
     <div id="ship__flex">
     <div class='onePal' id='shipOneOne'> </div>
@@ -2493,5 +2567,25 @@ buttonReset.onclick = function(event) {
   checkGetShip = 0;
 
   pushArr(arrUser);
+  render();
+};
+
+buttonAuto.onclick = function(event) {
+  ships.innerHTML = `
+    <div id="ship__flex">
+    </div>
+  `;
+
+  shipTwoOne = 1;
+  shipTwoTwo = 1;
+  shipTwoThree = 1;
+  shipThreeOne = 1;
+  shipThreeTwo = 1;
+  shipFourOne = 1;
+
+  checkGetShip = 0;
+  pressAuto = 1;
+  
+  pushAutoShips();
   render();
 };
