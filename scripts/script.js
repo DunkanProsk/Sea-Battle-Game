@@ -2663,6 +2663,7 @@ buttonStart.onclick = (event) => {startGame()};
 function startGame() {
   let val = 0;
   let allValShip = 20;
+  let allValShipForAi = 20;
   pushAutoShips(arrAi);
 
   console.log(arrAi);
@@ -2683,36 +2684,49 @@ function startGame() {
       if(val == 0) {
         if(arrAi[x][y] == 1) {
           --allValShip;
-          alert('Hit!');
+          arrAi[x][y] = 2;
           target.textContent = '1';
           target.style.backgroundColor = '#6cf7aa';
           val = 1;
           if(allValShip == 0) {
             alert('You win!');
-            location.reload();
+            alert('You win!');
+            alert('You win!');
+            alert('You win!');
+            val = 2;
           };
           Ai();
+        } else if(arrAi[x][y] == 2 || arrAi[x][y] == 3) {
+          
         } else {
-          alert('Past!');
+          arrAi[x][y] = 3;
           target.textContent = '-';
           target.style.backgroundColor = 'white';
           val = 1;
           Ai();
         };
-      };
+      } else if(val == 2) {alert('Game is over! Press reset!')};
 
       function Ai() {
         let x = Num();
         let y = Num();
 
         if(arrUser[x][y] == 1) {
-          alert('AI hit you!');
-          document.getElementById(`${x} - ${y}`).textContent = 'X';
+          arrUser[x][y] = 'x';
+          document.getElementById(`${x} - ${y}`).textContent = 'x';
           document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
           val = 0;
+          --allValShipForAi;
+          if(allValShipForAi == 0) {
+            alert('You lose!');
+            val = 2;
+          };
+        } else if(arrUser[x][y] == 'x' || arrUser[x][y] == '-') {
+          Ai();
         } else {
-          alert('AI missed!');
+          arrUser[x][y] = '-';
           document.getElementById(`${x} - ${y}`).textContent = '-';
+          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#b2b2b2';
           val = 0;
         };
       };
