@@ -2695,7 +2695,6 @@ function startGame() {
 
           if(checkKillShip(x, y, arrAi)) {
             renderArrAi(arrAi);
-            alert('Ship destroyed!');
           };
         } else if(arrAi[x][y] == 2 || arrAi[x][y] == 3) {
         } else {
@@ -2879,6 +2878,8 @@ function startGame() {
 
       if(checkAll(x, y)) {
         return true;
+      }else{
+       return false;
       };
   
     } else if(x == 0) {
@@ -2924,6 +2925,15 @@ function startGame() {
     };
   
     function checkAll(x, y) {
+      if(arr[x - 1][y - 1] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 1][y + 1] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x + 1][y + 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+      if(arr[x + 1][y - 1] == 1) return false;
+      if(arr[x][y - 1] == 1) return false;
+
       if(arr[x - 1][y - 1] != 2) asd(x - 1, y - 1);
       if(arr[x - 1][y] != 2) asd(x - 1, y);
       if(arr[x - 1][y + 1] != 2) asd(x - 1, y + 1);
@@ -2935,12 +2945,20 @@ function startGame() {
     };
   
     function checkNullxNully(x, y) {
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x + 1][y + 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+
       if(arr[x][y + 1] != 2) asd(x, y + 1);
       if(arr[x + 1][y + 1] != 2) asd(x + 1, y + 1);
       if(arr[x + 1][y] != 2) asd(x + 1, y);
     };
   
     function checkNullxFully(x, y) {
+      if(arr[x][y - 1] == 1) return false;
+      if(arr[x + 1][y - 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+
       if(arr[x][y - 1] != 2) asd(x, y - 1);
       if(arr[x + 1][y - 1] != 2) asd(x + 1, y - 1);
       if(arr[x + 1][y] != 2) asd(x + 1, y);
@@ -2953,12 +2971,22 @@ function startGame() {
     };
   
     function checkFullxNully(x, y) {
+      if(arr[x - 1][y + 1] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+
       if(arr[x][y + 1] != 2) asd(x, y + 1);
       if(arr[x - 1][y + 1] != 2) asd(x - 1, y + 1);
       if(arr[x - 1][y] != 2) asd(x - 1, y);
     };
   
     function checkFullxNumy(x, y) {
+      if(arr[x][y - 1] == 1) return false;
+      if(arr[x - 1][y - 1] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 1][y + 1] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      
       if(arr[x][y - 1] != 2) asd(x, y - 1);
       if(arr[x - 1][y - 1] != 2) asd(x - 1, y - 1);
       if(arr[x - 1][y] != 2) asd(x - 1, y);
@@ -2967,6 +2995,12 @@ function startGame() {
     };
   
     function checkNullxNumy(x, y) {
+      if(arr[x][y - 1] == 1) return false;
+      if(arr[x + 1][y - 1] == 1) return false;;
+      if(arr[x + 1][y] == 1) return false;
+      if(arr[x + 1][y + 1] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+
       if(arr[x][y - 1] != 2) asd(x, y - 1);
       if(arr[x + 1][y - 1] != 2) asd(x + 1, y - 1);
       if(arr[x + 1][y] != 2) asd(x + 1, y);
@@ -2975,6 +3009,12 @@ function startGame() {
     };
   
     function checkNumxNully(x, y) {
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 1][y + 1] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x + 1][y + 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+
       if(arr[x - 1][y] != 2) asd(x - 1, y);
       if(arr[x - 1][y + 1] != 2) asd(x - 1, y + 1);
       if(arr[x][y + 1] != 2) asd(x, y + 1);
@@ -2983,6 +3023,12 @@ function startGame() {
     };
   
     function checkNumxFully(x, y) {
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 1][y - 1] == 1) return false;
+      if(arr[x][y - 1] == 1) return false;
+      if(arr[x + 1][y - 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+
       if(arr[x - 1][y] != 2) asd(x - 1, y);
       if(arr[x - 1][y - 1] != 2) asd(x - 1, y - 1);
       if(arr[x][y - 1] != 2) asd(x, y - 1);
