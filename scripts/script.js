@@ -2248,135 +2248,86 @@ function checkEmptyOne(x, y, arr) {
 
   function checkAll(x, y) {
     if(arr[x - 1][y - 1] != 0) return false;
-
     if(arr[x - 1][y] != 0) return false;
-
     if(arr[x - 1][y + 1] != 0) return false;
-
     if(arr[x][y + 1] != 0) return false;
-
     if(arr[x + 1][y + 1] != 0) return false;
-
     if(arr[x + 1][y] != 0) return false;
-
     if(arr[x + 1][y - 1] != 0) return false;
-
     if(arr[x][y - 1] != 0) return false;
-
     if(arr[x][y] == 1) return false;
-
     return true;
   };
 
   function checkNullxNully(x, y) {
     if(arr[x][y + 1] != 0) return false;
-
     if(arr[x + 1][y + 1] != 0) return false;
-
     if(arr[x + 1][y] != 0) return false;
-
     if(arr[x][y] == 1) return false;
-
     return true;
   };
 
   function checkNullxFully(x, y) {
     if(arr[x][y - 1] != 0) return false;
-
     if(arr[x + 1][y - 1] != 0) return false;
-
     if(arr[x + 1][y] != 0) return false;
-
     if(arr[x][y] == 1) return false;
-
     return true;
   };
 
   function checkFullxFully(x, y) {
     if(arr[x - 1][y] != 0) return false;
-
     if(arr[x - 1][y - 1] != 0) return false;
-
     if(arr[x][y - 1] != 0) return false;
-
     if(arr[x][y] == 1) return false;
-
     return true;
   };
 
   function checkFullxNully(x, y) {
     if(arr[x][y + 1] != 0) return false;
-
     if(arr[x - 1][y + 1] != 0) return false;
-
     if(arr[x - 1][y] != 0) return false;
-
     if(arr[x][y] == 1) return false;
-
     return true;
   };
 
   function checkFullxNumy(x, y) {
     if(arr[x][y - 1] != 0) return false;
-
     if(arr[x - 1][y - 1] != 0) return false;
-
     if(arr[x - 1][y] != 0) return false;
-
     if(arr[x - 1][y + 1] != 0) return false;
-
     if(arr[x][y + 1] != 0) return false;
-
     if(arr[x][y] == 1) return false;
-
     return true;
   };
 
   function checkNullxNumy(x, y) {
     if(arr[x][y - 1] != 0) return false;
-
     if(arr[x + 1][y - 1] != 0) return false;
-
     if(arr[x + 1][y] != 0) return false;
-
     if(arr[x + 1][y + 1] != 0) return false;
-
     if(arr[x][y + 1] != 0) return false;
-
     if(arr[x][y] == 1) return false;
-
     return true;
   };
 
   function checkNumxNully(x, y) {
     if(arr[x - 1][y] != 0) return false;
-
     if(arr[x - 1][y + 1] != 0) return false;
-
     if(arr[x][y + 1] != 0) return false;
-
     if(arr[x + 1][y + 1] != 0) return false;
-
     if(arr[x + 1][y] != 0) return false;
-
     if(arr[x][y] == 1) return false;
-
     return true;
   };
 
   function checkNumxFully(x, y) {
     if(arr[x - 1][y] != 0) return false;
-
     if(arr[x - 1][y - 1] != 0) return false;
-
     if(arr[x][y - 1] != 0) return false;
-
     if(arr[x + 1][y - 1] != 0) return false;
-
     if(arr[x + 1][y] != 0) return false;
-
     if(arr[x][y] == 1) return false;
-
     return true;
   };
 };
@@ -2668,6 +2619,8 @@ buttonAuto.onclick = function(event) {
 
 buttonStart.onclick = (event) => {startGame()};
 
+tableAi.onclick = () => {alert('Arrenge the ships and press Start!')};
+
 function startGame() {
   endGame = 1;
   shipTwoOne = 1;
@@ -2705,6 +2658,9 @@ function startGame() {
       
       if(value == 0) {
         if(arrAi[x][y] == 1) {
+          if(checkKillShip(x, y, arrAi)) {
+            alert('Ship destroyed!');
+          };
           --allValShip;
           arrAi[x][y] = 2;
           target.textContent = '1';
@@ -2752,5 +2708,19 @@ function startGame() {
           value = 0;
         };
       };
+  };
+
+  function checkKillShip(x, y, arr) {
+    if(x - 1 >= 0 && y - 1 >= 0 && x + 1 <= 9 && y + 1 <= 9) {
+      if(arr[x - 1][y - 1] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 1][y + 1] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x + 1][y + 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+      if(arr[x + 1][y - 1] == 1) return false;
+      if(arr[x][y - 1] == 1) return false;
+    };
+    return true;
   };
 };
