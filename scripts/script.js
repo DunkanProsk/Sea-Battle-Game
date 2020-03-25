@@ -16,7 +16,8 @@ let arrUser = [],
     shipThreeTwo = 1,
     shipFourOne = 1,
     whichShipSelect = '',
-    valueShips = 10;
+    valueShips = 10,
+    endGame = 0;
 
 let table = document.getElementById('table__one');
 let tableAi = document.getElementById('table__two');
@@ -41,16 +42,16 @@ function pushArr(arr) {
   return arr;
 };
 
+function Num() {
+  return Math.floor(Math.random() * (9 - 0 + 1)) + 0;
+};
+
 function pushAutoShips(arr) {
   let one = 4,
       two = 3,
       three = 2,
       four = 1,
       val = 1;
-
-  function Num() {
-    return Math.floor(Math.random() * (9 - 0 + 1)) + 0;
-  };
 
   function pushShips(arr) {
     let x = Num(),
@@ -2412,81 +2413,81 @@ ships.onclick = function(event) {
           case 'shipTwoOne':
             if(shipTwoOne == 1) {
               document.getElementById("shipTwoOne").animate([
-                { width: '48px' }, 
-                { width: '90px' }
+                { width: '38px' }, 
+                { width: '70px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
           
-              event.target.parentNode.style.width = '90px';
-              event.target.parentNode.style.height = '48px';
+              event.target.parentNode.style.width = '70px';
+              event.target.parentNode.style.height = '38px';
               return shipTwoOne = 0;
             } else {
               document.getElementById("shipTwoOne").animate([
-                { height: '48px' }, 
-                { height: '90px' }
+                { height: '38px' }, 
+                { height: '70px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '48px';
-              event.target.parentNode.style.height = '90px';
+              event.target.parentNode.style.width = '38px';
+              event.target.parentNode.style.height = '70px';
               return shipTwoOne = 1;
             };
 
           case 'shipTwoTwo':
             if(shipTwoTwo == 1) {
               document.getElementById("shipTwoTwo").animate([
-                { width: '48px' }, 
-                { width: '90px' }
+                { width: '38px' }, 
+                { width: '70px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '90px';
-              event.target.parentNode.style.height = '48px';
+              event.target.parentNode.style.width = '70px';
+              event.target.parentNode.style.height = '38px';
               return shipTwoTwo = 0;
             } else {
               document.getElementById("shipTwoTwo").animate([
-                { height: '48px' }, 
-                { height: '90px' }
+                { height: '38px' }, 
+                { height: '70px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '48px';
-              event.target.parentNode.style.height = '90px';
+              event.target.parentNode.style.width = '38px';
+              event.target.parentNode.style.height = '70px';
               return shipTwoTwo = 1;
             };
 
           case 'shipTwoThree':
             if(shipTwoThree == 1) {
               document.getElementById("shipTwoThree").animate([
-                { width: '48px' }, 
-                { width: '90px' }
+                { width: '38px' }, 
+                { width: '70px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '90px';
-              event.target.parentNode.style.height = '48px';
+              event.target.parentNode.style.width = '70px';
+              event.target.parentNode.style.height = '38px';
               return shipTwoThree = 0;
             } else {
               document.getElementById("shipTwoThree").animate([
-                { height: '48px' }, 
-                { height: '90px' }
+                { height: '38px' }, 
+                { height: '70px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '48px';
-              event.target.parentNode.style.height = '90px';
+              event.target.parentNode.style.width = '38px';
+              event.target.parentNode.style.height = '70px';
               return shipTwoThree = 1;
             };
         };
@@ -2497,54 +2498,54 @@ ships.onclick = function(event) {
           case 'shipThreeOne':
             if(shipThreeOne == 1) {
               document.getElementById("shipThreeOne").animate([
-                { width: '48px' }, 
-                { width: '137px' }
+                { width: '38px' }, 
+                { width: '117px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '137px';
-              event.target.parentNode.style.height = '48px';
+              event.target.parentNode.style.width = '117px';
+              event.target.parentNode.style.height = '38px';
               return shipThreeOne = 0;
             } else {
               document.getElementById("shipThreeOne").animate([
-                { height: '48px' }, 
-                { height: '137px' }
+                { height: '38px' }, 
+                { height: '117px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '48px';
-              event.target.parentNode.style.height = '137px';
+              event.target.parentNode.style.width = '38px';
+              event.target.parentNode.style.height = '117px';
               return shipThreeOne = 1;
             };
 
           case 'shipThreeTwo':
             if(shipThreeTwo == 1) {
               document.getElementById("shipThreeTwo").animate([
-                { width: '48px' }, 
-                { width: '137px' }
+                { width: '38px' }, 
+                { width: '117px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '137px';
-              event.target.parentNode.style.height = '48px';
+              event.target.parentNode.style.width = '117px';
+              event.target.parentNode.style.height = '38px';
               return shipThreeTwo = 0;
             } else {
               document.getElementById("shipThreeTwo").animate([
-                { height: '48px' }, 
-                { height: '137px' }
+                { height: '38px' }, 
+                { height: '117px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '48px';
-              event.target.parentNode.style.height = '137px';
+              event.target.parentNode.style.width = '38px';
+              event.target.parentNode.style.height = '117px';
               return shipThreeTwo = 1;
             };
         };
@@ -2553,27 +2554,27 @@ ships.onclick = function(event) {
       if(event.target.className == 'pictureFour') {
         if(shipFourOne == 1) {
           document.getElementById("shipFourOne").animate([
-            { width: '48px' }, 
-            { width: '185px' }
+            { width: '38px' }, 
+            { width: '165px' }
           ], {
             duration: 250,
             iterations: 1,
           });
 
-          event.target.parentNode.style.width = '185px';
-          event.target.parentNode.style.height = '48px';
+          event.target.parentNode.style.width = '165px';
+          event.target.parentNode.style.height = '38px';
           return shipFourOne = 0;
         } else {
           document.getElementById("shipFourOne").animate([
-            { height: '48px' }, 
-            { height: '185px' }
+            { height: '38px' }, 
+            { height: '165px' }
           ], {
             duration: 250,
             iterations: 1,
           });
 
-          event.target.parentNode.style.width = '48px';
-          event.target.parentNode.style.height = '185px';
+          event.target.parentNode.style.width = '38px';
+          event.target.parentNode.style.height = '165px';
           return shipFourOne = 1;
         };
       };
@@ -2583,6 +2584,11 @@ ships.onclick = function(event) {
 };
 
 buttonReset.onclick = function(event) {
+  if(endGame == 1) {
+    location.reload();
+  };
+
+
   ships.innerHTML = `
     <div id="ship__flex">
     <div class='onePal' id='shipOneOne'> </div>
@@ -2623,6 +2629,7 @@ buttonReset.onclick = function(event) {
 
   pushArr(arrUser);
   render();
+
   buttonStart.style.visibility = '';
 };
 
@@ -2651,7 +2658,7 @@ buttonAuto.onclick = function(event) {
   document.getElementById("buttonStart").style.visibility = 'visible';
   document.getElementById("buttonStart").animate([
     { margin: '-80px' }, 
-    { margin: '50px' }
+    { margin: '40px' }
   ], {
     duration: 300,
     iterations: 1,
@@ -2661,18 +2668,22 @@ buttonAuto.onclick = function(event) {
 buttonStart.onclick = (event) => {startGame()};
 
 function startGame() {
+  endGame = 1;
   let val = 0;
   let allValShip = 20;
   let allValShipForAi = 20;
   pushAutoShips(arrAi);
 
-  console.log(arrAi);
   alert('Fire!');
 
   table.onclick = () => {
     alert('Dont shoot yourself!');
   };
   
+  buttonAuto.onclick = () => {
+    alert('Press reset!');
+  };
+
   tableAi.onclick = function(event) {
       let target = event.target;
       let idVal = target.id.split(' / ');
@@ -2690,10 +2701,10 @@ function startGame() {
           val = 1;
           if(allValShip == 0) {
             alert('You win!');
-            alert('You win!');
-            alert('You win!');
-            alert('You win!');
             val = 2;
+            buttonAuto.onclick = () => {alert('Game is over! Press reset!');};
+            tableAi.onclick = () => {alert('Game is over! Press reset!');};
+            table.onclick = () => {alert('Game is over! Press reset!');};
           };
           Ai();
         } else if(arrAi[x][y] == 2 || arrAi[x][y] == 3) {
@@ -2729,10 +2740,6 @@ function startGame() {
           document.getElementById(`${x} - ${y}`).style.backgroundColor = '#b2b2b2';
           val = 0;
         };
-      };
-
-      function Num() {
-        return Math.floor(Math.random() * (9 - 0 + 1)) + 0;
       };
   };
 };
