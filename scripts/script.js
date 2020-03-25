@@ -861,8 +861,7 @@ table.onclick = function(event) {
         return true;
       };
     };
-    
-    alert('The cage does not fit!');
+
     return false;
   };
 
@@ -924,7 +923,6 @@ table.onclick = function(event) {
             };
         };
       } else {
-        alert('The cage does not fit!');
         return false;
       };
     } return false;
@@ -977,7 +975,6 @@ table.onclick = function(event) {
             };
         };
       } else {
-        alert('The cage does not fit!');
         return false;
       };
     } return false;
@@ -1011,7 +1008,6 @@ table.onclick = function(event) {
           return true;
         };
       } else {
-        alert('The cage does not fit!');
         return false;
       };
     } return false;
@@ -2669,7 +2665,13 @@ buttonStart.onclick = (event) => {startGame()};
 
 function startGame() {
   endGame = 1;
-  let val = 0;
+  shipTwoOne = 1;
+  shipTwoTwo = 1;
+  shipTwoThree = 1;
+  shipThreeOne = 1;
+  shipThreeTwo = 1;
+  shipFourOne = 1;
+  let value = 0;
   let allValShip = 20;
   let allValShipForAi = 20;
   pushAutoShips(arrAi);
@@ -2692,16 +2694,16 @@ function startGame() {
   
       if (target.tagName != 'TD') return false;
       
-      if(val == 0) {
+      if(value == 0) {
         if(arrAi[x][y] == 1) {
           --allValShip;
           arrAi[x][y] = 2;
           target.textContent = '1';
           target.style.backgroundColor = '#6cf7aa';
-          val = 1;
+          value = 1;
           if(allValShip == 0) {
             alert('You win!');
-            val = 2;
+            value = 2;
             buttonAuto.onclick = () => {alert('Game is over! Press reset!');};
             tableAi.onclick = () => {alert('Game is over! Press reset!');};
             table.onclick = () => {alert('Game is over! Press reset!');};
@@ -2713,10 +2715,10 @@ function startGame() {
           arrAi[x][y] = 3;
           target.textContent = '-';
           target.style.backgroundColor = 'white';
-          val = 1;
+          value = 1;
           Ai();
         };
-      } else if(val == 2) {alert('Game is over! Press reset!')};
+      } else if(value == 2) {alert('Game is over! Press reset!')};
 
       function Ai() {
         let x = Num();
@@ -2726,11 +2728,11 @@ function startGame() {
           arrUser[x][y] = 'x';
           document.getElementById(`${x} - ${y}`).textContent = 'x';
           document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
-          val = 0;
+          value = 0;
           --allValShipForAi;
           if(allValShipForAi == 0) {
             alert('You lose!');
-            val = 2;
+            value = 2;
           };
         } else if(arrUser[x][y] == 'x' || arrUser[x][y] == '-') {
           Ai();
@@ -2738,7 +2740,7 @@ function startGame() {
           arrUser[x][y] = '-';
           document.getElementById(`${x} - ${y}`).textContent = '-';
           document.getElementById(`${x} - ${y}`).style.backgroundColor = '#b2b2b2';
-          val = 0;
+          value = 0;
         };
       };
   };
