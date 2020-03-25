@@ -34,7 +34,7 @@ pushArr(arrAi);
 function pushArr(arr) {
   for(let i = 0; i < 10; i++){
     arr[i] = [];
-    for (var j = 0; j < 10; j++) {
+    for (let j = 0; j < 10; j++) {
         arr[i][j] = 0;
     };
   };
@@ -46,11 +46,15 @@ function Num() {
   return Math.floor(Math.random() * (9 - 0 + 1)) + 0;
 };
 
-function pushAutoShips(arr) {
-  function NumVal() {
-    return Math.floor(Math.random() * (1 - 0 + 1)) + 0;
-  };
+function NumVal() {
+  return Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+};
 
+function NumVal4() {
+  return Math.floor(Math.random() * (3 - 0 + 1)) + 0;
+};
+
+function pushAutoShips(arr) {
   let one = 4,
       two = 3,
       three = 2,
@@ -2653,6 +2657,10 @@ function startGame() {
   let value = 0;
   let allValShip = 20;
   let allValShipForAi = 20;
+  let aiShoot = 0;
+  let xShoot = 0;
+  let yShoot = 0;
+
   pushAutoShips(arrAi);
 
   alert('Fire!');
@@ -2709,9 +2717,146 @@ function startGame() {
       function Ai() {
         let x = Num();
         let y = Num();
+        let whereSootAi = 0;
+
+        if(aiShoot == 1) {
+          let x = xShoot;
+          let y = yShoot;
+
+          switch(whereSootAi) {
+            case 0:
+              if(x - 1 >= 0) {
+                if(arrUser[x - 1][y] == 1) {
+                  arrUser[x - 1][y] = 'x';
+                  document.getElementById(`${x - 1} - ${y}`).textContent = 'x';
+                  document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#fd344fc2';
+                  aiShoot = 1;
+                  xShoot = x - 1;
+                  value = 0;
+                  --allValShipForAi;
+                  return;
+                };
+              };
+
+            case 1:
+              if(y + 1 <= 9) {
+                if(arrUser[x][y + 1] == 1) {
+                  arrUser[x][y + 1] = 'x';
+                  document.getElementById(`${x} - ${y + 1}`).textContent = 'x';
+                  document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+                  aiShoot = 1;
+                  yShoot = y + 1;
+                  value = 0;
+                  --allValShipForAi;
+                  return; 
+                };
+              };
+
+            case 2:
+              if(x + 1 <= 9) {
+                if(arrUser[x + 1][y] == 1) {
+                  arrUser[x + 1][y] = 'x';
+                  document.getElementById(`${x + 1} - ${y}`).textContent = 'x';
+                  document.getElementById(`${x + 1} - ${y}`).style.backgroundColor = '#fd344fc2';
+                  aiShoot = 1;
+                  xShoot = x + 1;
+                  value = 0;
+                  --allValShipForAi;
+                  return; 
+                };
+              };
+              
+            case 3:
+              if(y - 1 >= 0) {
+                if(arrUser[x][y - 1] == 1) {
+                  arrUser[x][y - 1] = 'x';
+                  document.getElementById(`${x} - ${y - 1}`).textContent = 'x';
+                  document.getElementById(`${x} - ${y - 1}`).style.backgroundColor = '#fd344fc2';
+                  aiShoot = 1;
+                  yShoot = y - 1; 
+                  value = 0;
+                  --allValShipForAi;
+                  return; 
+                };
+              };
+
+            case 4:
+              for(let x = 0; x < 10; x++) {
+                for (let y = 0; y < 10; y++) {
+                  if(arrUser[x][y] == 1) {
+                    switch(0) {
+                      case 0:
+                        if(x - 1 >= 0) {
+                          if(arrUser[x - 1][y] == 'x') {
+                            arrUser[x][y] = 'x';
+                            document.getElementById(`${x} - ${y}`).textContent = 'x';
+                            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+                            aiShoot = 0;
+                            value = 0;
+                            --allValShipForAi;
+                            return;
+                          };
+                        };
+          
+                      case 1:
+                        if(y + 1 <= 9) {
+                          if(arrUser[x][y + 1] == 'x') {
+                            arrUser[x][y] = 'x';
+                            document.getElementById(`${x} - ${y}`).textContent = 'x';
+                            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+                            aiShoot = 0;
+                            value = 0;
+                            --allValShipForAi;
+                            return; 
+                          };
+                        };
+          
+                      case 2:
+                        if(x + 1 <= 9) {
+                          if(arrUser[x + 1][y] == 'x') {
+                            arrUser[x][y] = 'x';
+                            document.getElementById(`${x} - ${y}`).textContent = 'x';
+                            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+                            aiShoot = 0;
+                            value = 0;
+                            --allValShipForAi;
+                            return; 
+                          };
+                        };
+                        
+                      case 3:
+                        if(y - 1 >= 0) {
+                          if(arrUser[x][y - 1] == 'x') {
+                            arrUser[x][y] = 'x';
+                            document.getElementById(`${x} - ${y}`).textContent = 'x';
+                            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+                            aiShoot = 0; 
+                            value = 0;
+                            --allValShipForAi;
+                            return; 
+                          };
+                        };
+                      
+                      default:
+                        aiShoot = 0;
+                        break;
+
+                    };
+                  };
+                };
+              };
+
+            default:
+              aiShoot = 0;
+              break;
+          };
+        };
 
         if(arrUser[x][y] == 1) {
           arrUser[x][y] = 'x';
+          xShoot = x;
+          yShoot = y;
+          aiShoot = 1;
           document.getElementById(`${x} - ${y}`).textContent = 'x';
           document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
           value = 0;
@@ -2727,6 +2872,32 @@ function startGame() {
           document.getElementById(`${x} - ${y}`).textContent = '-';
           document.getElementById(`${x} - ${y}`).style.backgroundColor = '#b2b2b2';
           value = 0;
+        };
+
+        function checkEmptyForAi(x, y) {
+          if(x - 1 >= 0) {
+            if(arrUser[x - 1][y] == 1) {
+              
+            };
+          };
+
+          if(y + 1 >= 0) {
+            if(arrUser[x][y + 1] == 1) {
+              
+            };
+          };
+
+          if(x + 1 >= 0) {
+            if(arrUser[x + 1][y] == 1) {
+              
+            };
+          };
+
+          if(y - 1 >= 0) {
+            if(arrUser[x][y - 1] == 1) {
+              
+            };
+          };
         };
       };
   };
