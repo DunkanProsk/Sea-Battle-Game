@@ -123,12 +123,13 @@ function pushDelShip(x, y, arrPush) {
   if(valueShips == 0) {
     document.getElementById("buttonStart").style.visibility = 'visible';
     document.getElementById("buttonStart").animate([
-      { margin: '-80px' }, 
-      { margin: '50px' }
+      { margin: '-150px' }, 
+      { margin: '-280px' }
     ], {
-      duration: 300,
+      duration: 500,
       iterations: 1,
     });
+    document.getElementById("buttonStart").style.margin = '-280px';
   };
 };
 
@@ -151,12 +152,13 @@ function pushDelShipTwo(x, y, arrPush, val) {
   if(valueShips == 0) {
     document.getElementById("buttonStart").style.visibility = 'visible';
     document.getElementById("buttonStart").animate([
-      { margin: '-80px' }, 
-      { margin: '50px' }
+    { margin: '-150px' }, 
+    { margin: '-280px' }
     ], {
-      duration: 300,
+      duration: 500,
       iterations: 1,
     });
+    document.getElementById("buttonStart").style.margin = '-280px';
   };
 };
 
@@ -181,12 +183,13 @@ function pushDelShipThree(x, y, arrPush, val) {
   if(valueShips == 0) {
     document.getElementById("buttonStart").style.visibility = 'visible';
     document.getElementById("buttonStart").animate([
-      { margin: '-80px' }, 
-      { margin: '50px' }
+      { margin: '-150px' }, 
+      { margin: '-280px' }
     ], {
-      duration: 300,
+      duration: 500,
       iterations: 1,
     });
+    document.getElementById("buttonStart").style.margin = '-280px';
   };
 };
 
@@ -213,12 +216,13 @@ function pushDelShipFour(x, y, arrPush, val) {
   if(valueShips == 0) {
     document.getElementById("buttonStart").style.visibility = 'visible';
     document.getElementById("buttonStart").animate([
-      { margin: '-80px' }, 
-      { margin: '50px' }
+      { margin: '-150px' }, 
+      { margin: '-280px' }
     ], {
-      duration: 300,
+      duration: 500,
       iterations: 1,
     });
+    document.getElementById("buttonStart").style.margin = '-280px';
   };
 };
 
@@ -2409,81 +2413,81 @@ ships.onclick = function(event) {
           case 'shipTwoOne':
             if(shipTwoOne == 1) {
               document.getElementById("shipTwoOne").animate([
-                { width: '38px' }, 
-                { width: '70px' }
+                { width: '35px' }, 
+                { width: '60px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
           
-              event.target.parentNode.style.width = '70px';
-              event.target.parentNode.style.height = '38px';
+              event.target.parentNode.style.width = '60px';
+              event.target.parentNode.style.height = '35px';
               return shipTwoOne = 0;
             } else {
               document.getElementById("shipTwoOne").animate([
-                { height: '38px' }, 
-                { height: '70px' }
+                { height: '35px' }, 
+                { height: '60px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '38px';
-              event.target.parentNode.style.height = '70px';
+              event.target.parentNode.style.width = '35px';
+              event.target.parentNode.style.height = '60px';
               return shipTwoOne = 1;
             };
 
           case 'shipTwoTwo':
             if(shipTwoTwo == 1) {
               document.getElementById("shipTwoTwo").animate([
-                { width: '38px' }, 
-                { width: '70px' }
+                { width: '35px' }, 
+                { width: '60px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '70px';
-              event.target.parentNode.style.height = '38px';
+              event.target.parentNode.style.width = '60px';
+              event.target.parentNode.style.height = '35px';
               return shipTwoTwo = 0;
             } else {
               document.getElementById("shipTwoTwo").animate([
-                { height: '38px' }, 
-                { height: '70px' }
+                { height: '35px' }, 
+                { height: '60px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '38px';
-              event.target.parentNode.style.height = '70px';
+              event.target.parentNode.style.width = '35px';
+              event.target.parentNode.style.height = '60px';
               return shipTwoTwo = 1;
             };
 
           case 'shipTwoThree':
             if(shipTwoThree == 1) {
               document.getElementById("shipTwoThree").animate([
-                { width: '38px' }, 
-                { width: '70px' }
+                { width: '35px' }, 
+                { width: '60px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '70px';
-              event.target.parentNode.style.height = '38px';
+              event.target.parentNode.style.width = '60px';
+              event.target.parentNode.style.height = '35px';
               return shipTwoThree = 0;
             } else {
               document.getElementById("shipTwoThree").animate([
-                { height: '38px' }, 
-                { height: '70px' }
+                { height: '35px' }, 
+                { height: '60px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '38px';
-              event.target.parentNode.style.height = '70px';
+              event.target.parentNode.style.width = '35px';
+              event.target.parentNode.style.height = '60px';
               return shipTwoThree = 1;
             };
         };
@@ -2494,54 +2498,54 @@ ships.onclick = function(event) {
           case 'shipThreeOne':
             if(shipThreeOne == 1) {
               document.getElementById("shipThreeOne").animate([
-                { width: '38px' }, 
-                { width: '117px' }
+                { width: '35px' }, 
+                { width: '100px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '117px';
-              event.target.parentNode.style.height = '38px';
+              event.target.parentNode.style.width = '100px';
+              event.target.parentNode.style.height = '35px';
               return shipThreeOne = 0;
             } else {
               document.getElementById("shipThreeOne").animate([
-                { height: '38px' }, 
-                { height: '117px' }
+                { height: '35px' }, 
+                { height: '100px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '38px';
-              event.target.parentNode.style.height = '117px';
+              event.target.parentNode.style.width = '35px';
+              event.target.parentNode.style.height = '100px';
               return shipThreeOne = 1;
             };
 
           case 'shipThreeTwo':
             if(shipThreeTwo == 1) {
               document.getElementById("shipThreeTwo").animate([
-                { width: '38px' }, 
-                { width: '117px' }
+                { width: '35px' }, 
+                { width: '100px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '117px';
-              event.target.parentNode.style.height = '38px';
+              event.target.parentNode.style.width = '100px';
+              event.target.parentNode.style.height = '35px';
               return shipThreeTwo = 0;
             } else {
               document.getElementById("shipThreeTwo").animate([
-                { height: '38px' }, 
-                { height: '117px' }
+                { height: '35px' }, 
+                { height: '100px' }
               ], {
                 duration: 250,
                 iterations: 1,
               });
 
-              event.target.parentNode.style.width = '38px';
-              event.target.parentNode.style.height = '117px';
+              event.target.parentNode.style.width = '35px';
+              event.target.parentNode.style.height = '100px';
               return shipThreeTwo = 1;
             };
         };
@@ -2550,27 +2554,27 @@ ships.onclick = function(event) {
       if(event.target.className == 'pictureFour') {
         if(shipFourOne == 1) {
           document.getElementById("shipFourOne").animate([
-            { width: '38px' }, 
-            { width: '165px' }
+            { width: '35px' }, 
+            { width: '144px' }
           ], {
             duration: 250,
             iterations: 1,
           });
 
-          event.target.parentNode.style.width = '165px';
-          event.target.parentNode.style.height = '38px';
+          event.target.parentNode.style.width = '144px';
+          event.target.parentNode.style.height = '35px';
           return shipFourOne = 0;
         } else {
           document.getElementById("shipFourOne").animate([
-            { height: '38px' }, 
-            { height: '165px' }
+            { height: '35px' }, 
+            { height: '144px' }
           ], {
             duration: 250,
             iterations: 1,
           });
 
-          event.target.parentNode.style.width = '38px';
-          event.target.parentNode.style.height = '165px';
+          event.target.parentNode.style.width = '35px';
+          event.target.parentNode.style.height = '144px';
           return shipFourOne = 1;
         };
       };
@@ -2582,8 +2586,10 @@ ships.onclick = function(event) {
 buttonReset.onclick = function(event) {
   if(endGame == 1) {
     location.reload();
+    return;
   };
 
+  buttonStart.style.visibility = '';
 
   ships.innerHTML = `
     <div id="ship__flex">
@@ -2625,8 +2631,6 @@ buttonReset.onclick = function(event) {
 
   pushArr(arrUser);
   render();
-
-  buttonStart.style.visibility = '';
 };
 
 buttonAuto.onclick = function(event) {
@@ -2653,12 +2657,13 @@ buttonAuto.onclick = function(event) {
 
   document.getElementById("buttonStart").style.visibility = 'visible';
   document.getElementById("buttonStart").animate([
-    { margin: '-80px' }, 
-    { margin: '40px' }
+    { margin: '-150px' }, 
+    { margin: '-280px' }
   ], {
-    duration: 300,
+    duration: 500,
     iterations: 1,
   });
+  document.getElementById("buttonStart").style.margin = '-280px';
 };
 
 buttonStart.onclick = (event) => {startGame()};
@@ -2683,6 +2688,10 @@ function startGame() {
   };
   
   buttonAuto.onclick = () => {
+    alert('Press reset!');
+  };
+
+  buttonStart.onclick = () => {
     alert('Press reset!');
   };
 
