@@ -2693,9 +2693,9 @@ function startGame() {
           };
           Ai();
 
-          if(checkKillShip(x, y, arrAi)) {
-            renderArrAi(arrAi);
-          };
+          checkOurKillShip(x, y, arrAi);
+          renderArrAi(arrAi);
+          
         } else if(arrAi[x][y] == 2 || arrAi[x][y] == 3) {
         } else {
           arrAi[x][y] = 3;
