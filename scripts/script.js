@@ -2678,228 +2678,238 @@ function startGame() {
   };
 
   tableAi.onclick = function(event) {
-      let target = event.target;
-      let idVal = target.id.split(' / ');
-      let x = Number(idVal[0]);
-      let y = Number(idVal[1]);
-  
-      if (target.tagName != 'TD') return false;
-      
-      if(value == 0) {
-        if(arrAi[x][y] == 1) {
-          --allValShip;
-          arrAi[x][y] = 2;
-          target.textContent = '1';
-          target.style.backgroundColor = '#6cf7aa';
-          value = 1;
-          if(allValShip == 0) {
-            alert('You win!');
-            value = 2;
-            buttonAuto.onclick = () => {alert('Game is over! Press reset!');};
-            tableAi.onclick = () => {alert('Game is over! Press reset!');};
-            table.onclick = () => {alert('Game is over! Press reset!');};
-          };
-          Ai();
+    let target = event.target;
+    let idVal = target.id.split(' / ');
+    let x = Number(idVal[0]);
+    let y = Number(idVal[1]);
 
-          checkOurKillShip(x, y, arrAi);
-          renderArrAi(arrAi);
-          
-        } else if(arrAi[x][y] == 2 || arrAi[x][y] == 3) {
-        } else {
-          arrAi[x][y] = 3;
-          target.textContent = '-';
-          target.style.backgroundColor = 'white';
-          value = 1;
-          Ai();
+    if (target.tagName != 'TD') return false;
+    
+    if(value == 0) {
+      if(arrAi[x][y] == 1) {
+        --allValShip;
+        arrAi[x][y] = 2;
+        target.textContent = '1';
+        target.style.backgroundColor = '#6cf7aa';
+        value = 1;
+        if(allValShip == 0) {
+          alert('You win!');
+          value = 2;
+          buttonAuto.onclick = () => {alert('Game is over! Press reset!');};
+          tableAi.onclick = () => {alert('Game is over! Press reset!');};
+          table.onclick = () => {alert('Game is over! Press reset!');};
         };
-      } else if(value == 2) {alert('Game is over! Press reset!')};
+        Ai();
 
-      function Ai() {
-        let x = Num();
-        let y = Num();
-        let whereSootAi = 0;
+        checkOurKillShip(x, y, arrAi);
+        renderArrAi(arrAi);
+        
+      } else if(arrAi[x][y] == 2 || arrAi[x][y] == 3) {
+      } else {
+        arrAi[x][y] = 3;
+        target.textContent = '-';
+        target.style.backgroundColor = 'white';
+        value = 1;
+        Ai();
+      };
+    } else if(value == 2) {alert('Game is over! Press reset!')};
 
-        if(aiShoot == 1) {
-          let x = xShoot;
-          let y = yShoot;
+    function endG() {
+      if(allValShip != 0) {
+        if(allValShipForAi == 0) {
+          value = 2;
+          buttonAuto.onclick = () => {alert('Game is over! Press reset!');};
+          tableAi.onclick = () => {alert('Game is over! Press reset!');};
+          table.onclick = () => {alert('Game is over! Press reset!');};
+          alert('You lose!');
+        } else {return};
+      } else {return};
+    };
 
-          switch(whereSootAi) {
-            case 0:
-              if(x - 1 >= 0) {
-                if(arrUser[x - 1][y] == 1) {
-                  arrUser[x - 1][y] = 'x';
-                  document.getElementById(`${x - 1} - ${y}`).textContent = 'x';
-                  document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#fd344fc2';
-                  aiShoot = 1;
-                  xShoot = x - 1;
-                  value = 0;
-                  --allValShipForAi;
-                  return;
-                };
+    function Ai() {
+      let x = Num();
+      let y = Num();
+      let whereSootAi = 0;
+
+      if(aiShoot == 1) {
+        let x = xShoot;
+        let y = yShoot;
+
+        switch(whereSootAi) {
+          case 0:
+            if(x - 1 >= 0) {
+              if(arrUser[x - 1][y] == 1) {
+                arrUser[x - 1][y] = 'x';
+                document.getElementById(`${x - 1} - ${y}`).textContent = 'x';
+                document.getElementById(`${x - 1} - ${y}`).style.backgroundColor = '#fd344fc2';
+                aiShoot = 1;
+                xShoot = x - 1;
+                value = 0;
+                --allValShipForAi;
+                endG();
+                checkOurKillShipAi(x, y, arrUser);
+                renderArrUser(arrUser);
+                return;
               };
+            };
 
-            case 1:
-              if(y + 1 <= 9) {
-                if(arrUser[x][y + 1] == 1) {
-                  arrUser[x][y + 1] = 'x';
-                  document.getElementById(`${x} - ${y + 1}`).textContent = 'x';
-                  document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
-                  aiShoot = 1;
-                  yShoot = y + 1;
-                  value = 0;
-                  --allValShipForAi;
-                  return; 
-                };
+          case 1:
+            if(y + 1 <= 9) {
+              if(arrUser[x][y + 1] == 1) {
+                arrUser[x][y + 1] = 'x';
+                document.getElementById(`${x} - ${y + 1}`).textContent = 'x';
+                document.getElementById(`${x} - ${y + 1}`).style.backgroundColor = '#fd344fc2';
+                aiShoot = 1;
+                yShoot = y + 1;
+                value = 0;
+                --allValShipForAi;
+                endG();
+                checkOurKillShipAi(x, y, arrUser);
+                renderArrUser(arrUser);
+                return; 
               };
+            };
 
-            case 2:
-              if(x + 1 <= 9) {
-                if(arrUser[x + 1][y] == 1) {
-                  arrUser[x + 1][y] = 'x';
-                  document.getElementById(`${x + 1} - ${y}`).textContent = 'x';
-                  document.getElementById(`${x + 1} - ${y}`).style.backgroundColor = '#fd344fc2';
-                  aiShoot = 1;
-                  xShoot = x + 1;
-                  value = 0;
-                  --allValShipForAi;
-                  return; 
-                };
+          case 2:
+            if(x + 1 <= 9) {
+              if(arrUser[x + 1][y] == 1) {
+                arrUser[x + 1][y] = 'x';
+                document.getElementById(`${x + 1} - ${y}`).textContent = 'x';
+                document.getElementById(`${x + 1} - ${y}`).style.backgroundColor = '#fd344fc2';
+                aiShoot = 1;
+                xShoot = x + 1;
+                value = 0;
+                --allValShipForAi;
+                endG();
+                checkOurKillShipAi(x, y, arrUser);
+                renderArrUser(arrUser);
+                return; 
               };
-              
-            case 3:
-              if(y - 1 >= 0) {
-                if(arrUser[x][y - 1] == 1) {
-                  arrUser[x][y - 1] = 'x';
-                  document.getElementById(`${x} - ${y - 1}`).textContent = 'x';
-                  document.getElementById(`${x} - ${y - 1}`).style.backgroundColor = '#fd344fc2';
-                  aiShoot = 1;
-                  yShoot = y - 1; 
-                  value = 0;
-                  --allValShipForAi;
-                  return; 
-                };
+            };
+            
+          case 3:
+            if(y - 1 >= 0) {
+              if(arrUser[x][y - 1] == 1) {
+                arrUser[x][y - 1] = 'x';
+                document.getElementById(`${x} - ${y - 1}`).textContent = 'x';
+                document.getElementById(`${x} - ${y - 1}`).style.backgroundColor = '#fd344fc2';
+                aiShoot = 1;
+                yShoot = y - 1; 
+                value = 0;
+                --allValShipForAi;
+                endG();
+                checkOurKillShipAi(x, y, arrUser);
+                renderArrUser(arrUser);
+                return; 
               };
+            };
 
-            case 4:
-              for(let x = 0; x < 10; x++) {
-                for (let y = 0; y < 10; y++) {
-                  if(arrUser[x][y] == 1) {
-                    switch(0) {
-                      case 0:
-                        if(x - 1 >= 0) {
-                          if(arrUser[x - 1][y] == 'x') {
-                            arrUser[x][y] = 'x';
-                            document.getElementById(`${x} - ${y}`).textContent = 'x';
-                            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
-                            aiShoot = 0;
-                            value = 0;
-                            --allValShipForAi;
-                            return;
-                          };
+          case 4:
+            for(let x = 0; x < 10; x++) {
+              for (let y = 0; y < 10; y++) {
+                if(arrUser[x][y] == 1) {
+                  switch(0) {
+                    case 0:
+                      if(x - 1 >= 0) {
+                        if(arrUser[x - 1][y] == 'x') {
+                          arrUser[x][y] = 'x';
+                          document.getElementById(`${x} - ${y}`).textContent = 'x';
+                          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+                          aiShoot = 0;
+                          value = 0;
+                          --allValShipForAi;
+                          endG();
+                          checkOurKillShipAi(x, y, arrUser);
+                          renderArrUser(arrUser);
+                          return;
                         };
-          
-                      case 1:
-                        if(y + 1 <= 9) {
-                          if(arrUser[x][y + 1] == 'x') {
-                            arrUser[x][y] = 'x';
-                            document.getElementById(`${x} - ${y}`).textContent = 'x';
-                            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
-                            aiShoot = 0;
-                            value = 0;
-                            --allValShipForAi;
-                            return; 
-                          };
+                      };
+        
+                    case 1:
+                      if(y + 1 <= 9) {
+                        if(arrUser[x][y + 1] == 'x') {
+                          arrUser[x][y] = 'x';
+                          document.getElementById(`${x} - ${y}`).textContent = 'x';
+                          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+                          aiShoot = 0;
+                          value = 0;
+                          --allValShipForAi;
+                          endG();
+                          checkOurKillShipAi(x, y, arrUser);
+                          renderArrUser(arrUser);
+                          return; 
                         };
-          
-                      case 2:
-                        if(x + 1 <= 9) {
-                          if(arrUser[x + 1][y] == 'x') {
-                            arrUser[x][y] = 'x';
-                            document.getElementById(`${x} - ${y}`).textContent = 'x';
-                            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
-                            aiShoot = 0;
-                            value = 0;
-                            --allValShipForAi;
-                            return; 
-                          };
+                      };
+        
+                    case 2:
+                      if(x + 1 <= 9) {
+                        if(arrUser[x + 1][y] == 'x') {
+                          arrUser[x][y] = 'x';
+                          document.getElementById(`${x} - ${y}`).textContent = 'x';
+                          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+                          aiShoot = 0;
+                          value = 0;
+                          --allValShipForAi;
+                          endG();
+                          checkOurKillShipAi(x, y, arrUser);
+                          renderArrUser(arrUser);
+                          return; 
                         };
-                        
-                      case 3:
-                        if(y - 1 >= 0) {
-                          if(arrUser[x][y - 1] == 'x') {
-                            arrUser[x][y] = 'x';
-                            document.getElementById(`${x} - ${y}`).textContent = 'x';
-                            document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
-                            aiShoot = 0; 
-                            value = 0;
-                            --allValShipForAi;
-                            return; 
-                          };
-                        };
+                      };
                       
-                      default:
-                        aiShoot = 0;
-                        break;
+                    case 3:
+                      if(y - 1 >= 0) {
+                        if(arrUser[x][y - 1] == 'x') {
+                          arrUser[x][y] = 'x';
+                          document.getElementById(`${x} - ${y}`).textContent = 'x';
+                          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+                          aiShoot = 0; 
+                          value = 0;
+                          --allValShipForAi;
+                          endG();
+                          checkOurKillShipAi(x, y, arrUser);
+                          renderArrUser(arrUser);
+                          return; 
+                        };
+                      };
+                    
+                    default:
+                      aiShoot = 0;
+                      break;
 
-                    };
                   };
                 };
               };
-
-            default:
-              aiShoot = 0;
-              break;
-          };
-        };
-
-        if(arrUser[x][y] == 1) {
-          arrUser[x][y] = 'x';
-          xShoot = x;
-          yShoot = y;
-          aiShoot = 1;
-          document.getElementById(`${x} - ${y}`).textContent = 'x';
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
-          value = 0;
-          --allValShipForAi;
-          if(allValShipForAi == 0) {
-            alert('You lose!');
-            value = 2;
-          };
-        } else if(arrUser[x][y] == 'x' || arrUser[x][y] == '-') {
-          Ai();
-        } else {
-          arrUser[x][y] = '-';
-          document.getElementById(`${x} - ${y}`).textContent = '-';
-          document.getElementById(`${x} - ${y}`).style.backgroundColor = '#b2b2b2';
-          value = 0;
-        };
-
-        function checkEmptyForAi(x, y) {
-          if(x - 1 >= 0) {
-            if(arrUser[x - 1][y] == 1) {
-              
             };
-          };
 
-          if(y + 1 >= 0) {
-            if(arrUser[x][y + 1] == 1) {
-              
-            };
-          };
-
-          if(x + 1 >= 0) {
-            if(arrUser[x + 1][y] == 1) {
-              
-            };
-          };
-
-          if(y - 1 >= 0) {
-            if(arrUser[x][y - 1] == 1) {
-              
-            };
-          };
+          default:
+            aiShoot = 0;
+            break;
         };
       };
+
+      if(arrUser[x][y] == 1) {
+        arrUser[x][y] = 'x';
+        xShoot = x;
+        yShoot = y;
+        aiShoot = 1;
+        document.getElementById(`${x} - ${y}`).textContent = 'x';
+        document.getElementById(`${x} - ${y}`).style.backgroundColor = '#fd344fc2';
+        value = 0;
+        --allValShipForAi;
+        endG();
+        renderArrUser(arrUser);
+        checkOurKillShipAi(x, y, arrUser);
+        
+      } else if(arrUser[x][y] == 'x' || arrUser[x][y] == '-') {
+        Ai();
+      } else {
+        arrUser[x][y] = '-';
+        document.getElementById(`${x} - ${y}`).textContent = '-';
+        document.getElementById(`${x} - ${y}`).style.backgroundColor = '#b2b2b2';
+        value = 0;
+      };
+    };
   };
   
   function renderArrAi(arrA) {
@@ -2912,129 +2922,13 @@ function startGame() {
     };
   };
 
-  function checkKillShip(x, y, arr) {
-    if((x > 0 && y > 0) && (x < 9 && y < 9)) {
-
-      if(checkAll(x, y)) {
-        return true;
+  function renderArrUser(arrU) {
+    for (let i = 0; i < 10; i++){
+      for (var j = 0; j < 10; j++) {
+        if(arrU[i][j] == 'x') {
+          checkOurKillShipAi(i, j, arrU);
+        };
       };
-  
-    } else if(x == 0) {
-  
-        if(y == 0) {
-          if(checkNullxNully(x, y)) return true;
-          return false;
-        };
-  
-        if(y == 9) {
-          if(checkNullxFully(x, y)) return true;
-          return false;
-        };
-  
-        if(checkNullxNumy(x, y)) return true;
-        return false;
-  
-    } else if(x == 9) {
-        
-        if(y == 0) {
-          if(checkFullxNully(x, y)) return true;
-          return false;
-        };
-  
-        if(y == 9) {
-          if(checkFullxFully(x, y)) return true;
-          return false;
-        };
-  
-        if(checkFullxNumy(x, y)) return true;
-        return false;
-  
-    } else if(y == 0) {
-  
-      if(checkNumxNully(x, y)) return true;
-      return false;
-  
-    } else if(y == 9) {
-  
-      if(checkNumxFully(x, y)) return true;
-      return false;
-  
-    };
-  
-    function checkAll(x, y) {
-      if(arr[x - 1][y - 1] == 1) return false;
-      if(arr[x - 1][y] == 1) return false;
-      if(arr[x - 1][y + 1] == 1) return false;
-      if(arr[x][y + 1] == 1) return false;
-      if(arr[x + 1][y + 1] == 1) return false;
-      if(arr[x + 1][y] == 1) return false;
-      if(arr[x + 1][y - 1] == 1) return false;
-      if(arr[x][y - 1] == 1) return false;
-      return true;
-    };
-  
-    function checkNullxNully(x, y) {
-      if(arr[x][y + 1] == 1) return false;
-      if(arr[x + 1][y + 1] == 1) return false;
-      if(arr[x + 1][y] == 1) return false;
-      return true;
-    };
-  
-    function checkNullxFully(x, y) {
-      if(arr[x][y - 1] == 1) return false;
-      if(arr[x + 1][y - 1] == 1) return false;
-      if(arr[x + 1][y] == 1) return false;
-      return true;
-    };
-  
-    function checkFullxFully(x, y) {
-      if(arr[x - 1][y] == 1) return false;
-      if(arr[x - 1][y - 1] == 1) return false;
-      if(arr[x][y - 1] == 1) return false;
-      return true;
-    };
-  
-    function checkFullxNully(x, y) {
-      if(arr[x][y + 1] == 1) return false;
-      if(arr[x - 1][y + 1] == 1) return false;
-      if(arr[x - 1][y] == 1) return false;
-      return true;
-    };
-  
-    function checkFullxNumy(x, y) {
-      if(arr[x][y - 1] == 1) return false;
-      if(arr[x - 1][y - 1] == 1) return false;
-      if(arr[x - 1][y] == 1) return false;
-      if(arr[x - 1][y + 1] == 1) return false;
-      if(arr[x][y + 1] == 1) return false;
-      return true;
-    };
-  
-    function checkNullxNumy(x, y) {
-      if(arr[x][y - 1] == 1) return false;
-      if(arr[x + 1][y - 1] == 1) return false;
-      if(arr[x + 1][y] == 1) return false;
-      if(arr[x + 1][y + 1] == 1) return false;
-      if(arr[x][y + 1] == 1) return false;
-      return true;
-    };
-  
-    function checkNumxNully(x, y) {
-      if(arr[x - 1][y] == 1) return false;
-      if(arr[x - 1][y + 1] == 1) return false;
-      if(arr[x][y + 1] == 1) return false;
-      if(arr[x + 1][y + 1] == 1) return false;
-      if(arr[x + 1][y] == 1) return false;
-      return true;
-    };
-  
-    function checkNumxFully(x, y) {
-      if(arr[x - 1][y] == 1) return false;
-      if(arr[x - 1][y - 1] == 1) return false;
-      if(arr[x][y - 1] == 1) return false;
-      if(arr[x + 1][y - 1] == 1) return false;
-      if(arr[x + 1][y] == 1) return false;
-      return true;
     };
   };
 
@@ -3205,6 +3099,176 @@ function startGame() {
       if(arr[x][y - 1] != 2) asd(x, y - 1);
       if(arr[x + 1][y - 1] != 2) asd(x + 1, y - 1);
       if(arr[x + 1][y] != 2) asd(x + 1, y);
+    };
+  };
+
+  function checkOurKillShipAi(x, y, arr) {
+    function asdv(i, j) {
+      document.getElementById(`${i} - ${j}`).textContent = '-';
+      document.getElementById(`${i} - ${j}`).style.backgroundColor = '#b2b2b2';
+      arr[i][j] = '-';
+    };
+    
+    if((x > 0 && y > 0) && (x < 9 && y < 9)) {
+
+      if(checkAll(x, y)) {
+        return true;
+      } else {
+        return false;
+      };
+  
+    } else if(x == 0) {
+  
+        if(y == 0) {
+          if(checkNullxNully(x, y)) return true;
+          return false;
+        };
+  
+        if(y == 9) {
+          if(checkNullxFully(x, y)) return true;
+          return false;
+        };
+  
+        if(checkNullxNumy(x, y)) return true;
+        return false;
+  
+    } else if(x == 9) {
+        
+        if(y == 0) {
+          if(checkFullxNully(x, y)) return true;
+          return false;
+        };
+  
+        if(y == 9) {
+          if(checkFullxFully(x, y)) return true;
+          return false;
+        };
+  
+        if(checkFullxNumy(x, y)) return true;
+        return false;
+  
+    } else if(y == 0) {
+  
+      if(checkNumxNully(x, y)) return true;
+      return false;
+  
+    } else if(y == 9) {
+  
+      if(checkNumxFully(x, y)) return true;
+      return false;
+  
+    };
+  
+    function checkAll(x, y) {
+      if(arr[x - 1][y - 1] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 1][y + 1] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x + 1][y + 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+      if(arr[x + 1][y - 1] == 1) return false;
+      if(arr[x][y - 1] == 1) return false;
+
+      if(arr[x - 1][y - 1] != 'x') asdv(x - 1, y - 1);
+      if(arr[x - 1][y] != 'x') asdv(x - 1, y);
+      if(arr[x - 1][y + 1] != 'x') asdv(x - 1, y + 1);
+      if(arr[x][y + 1] != 'x') asdv(x, y + 1);
+      if(arr[x + 1][y + 1] != 'x') asdv(x + 1, y + 1);
+      if(arr[x + 1][y] != 'x') asdv(x + 1, y);
+      if(arr[x + 1][y - 1] != 'x') asdv(x + 1, y - 1);
+      if(arr[x][y - 1] != 'x') asdv(x, y - 1);
+    };
+  
+    function checkNullxNully(x, y) {
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x + 1][y + 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+
+      if(arr[x][y + 1] != 'x') asdv(x, y + 1);
+      if(arr[x + 1][y + 1] != 'x') asdv(x + 1, y + 1);
+      if(arr[x + 1][y] != 'x') asdv(x + 1, y);
+    };
+  
+    function checkNullxFully(x, y) {
+      if(arr[x][y - 1] == 1) return false;
+      if(arr[x + 1][y - 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+
+      if(arr[x][y - 1] != 'x') asdv(x, y - 1);
+      if(arr[x + 1][y - 1] != 'x') asdv(x + 1, y - 1);
+      if(arr[x + 1][y] != 'x') asdv(x + 1, y);
+    };
+  
+    function checkFullxFully(x, y) {
+      if(arr[x - 1][y] != 'x') asdv(x - 1, y);
+      if(arr[x - 1][y - 1] != 'x') asdv(x - 1, y - 1);
+      if(arr[x][y - 1] != 'x') asdv(x, y - 1);
+    };
+  
+    function checkFullxNully(x, y) {
+      if(arr[x - 1][y + 1] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+
+      if(arr[x][y + 1] != 'x') asdv(x, y + 1);
+      if(arr[x - 1][y + 1] != 'x') asdv(x - 1, y + 1);
+      if(arr[x - 1][y] != 'x') asdv(x - 1, y);
+    };
+  
+    function checkFullxNumy(x, y) {
+      if(arr[x][y - 1] == 1) return false;
+      if(arr[x - 1][y - 1] == 1) return false;
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 1][y + 1] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      
+      if(arr[x][y - 1] != 'x') asdv(x, y - 1);
+      if(arr[x - 1][y - 1] != 'x') asdv(x - 1, y - 1);
+      if(arr[x - 1][y] != 'x') asdv(x - 1, y);
+      if(arr[x - 1][y + 1] != 'x') asdv(x - 1, y + 1);
+      if(arr[x][y + 1] != 'x') asdv(x, y + 1);
+    };
+  
+    function checkNullxNumy(x, y) {
+      if(arr[x][y - 1] == 1) return false;
+      if(arr[x + 1][y - 1] == 1) return false;;
+      if(arr[x + 1][y] == 1) return false;
+      if(arr[x + 1][y + 1] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+
+      if(arr[x][y - 1] != 'x') asdv(x, y - 1);
+      if(arr[x + 1][y - 1] != 'x') asdv(x + 1, y - 1);
+      if(arr[x + 1][y] != 'x') asdv(x + 1, y);
+      if(arr[x + 1][y + 1] != 'x') asdv(x + 1, y + 1);
+      if(arr[x][y + 1] != 'x') asdv(x, y + 1);
+    };
+  
+    function checkNumxNully(x, y) {
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 1][y + 1] == 1) return false;
+      if(arr[x][y + 1] == 1) return false;
+      if(arr[x + 1][y + 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+
+      if(arr[x - 1][y] != 'x') asdv(x - 1, y);
+      if(arr[x - 1][y + 1] != 'x') asdv(x - 1, y + 1);
+      if(arr[x][y + 1] != 'x') asdv(x, y + 1);
+      if(arr[x + 1][y + 1] != 'x') asdv(x + 1, y + 1);
+      if(arr[x + 1][y] != 'x') asdv(x + 1, y);
+    };
+  
+    function checkNumxFully(x, y) {
+      if(arr[x - 1][y] == 1) return false;
+      if(arr[x - 1][y - 1] == 1) return false;
+      if(arr[x][y - 1] == 1) return false;
+      if(arr[x + 1][y - 1] == 1) return false;
+      if(arr[x + 1][y] == 1) return false;
+
+      if(arr[x - 1][y] != 'x') asdv(x - 1, y);
+      if(arr[x - 1][y - 1] != 'x') asdv(x - 1, y - 1);
+      if(arr[x][y - 1] != 'x') asdv(x, y - 1);
+      if(arr[x + 1][y - 1] != 'x') asdv(x + 1, y - 1);
+      if(arr[x + 1][y] != 'x') asdv(x + 1, y);
     };
   };
 };
