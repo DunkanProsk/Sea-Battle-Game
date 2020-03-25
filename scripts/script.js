@@ -47,11 +47,15 @@ function Num() {
 };
 
 function pushAutoShips(arr) {
+  function NumVal() {
+    return Math.floor(Math.random() * (1 - 0 + 1)) + 0;
+  };
+
   let one = 4,
       two = 3,
       three = 2,
       four = 1,
-      val = 1;
+      val = NumVal();
 
   function pushShips(arr) {
     let x = Num(),
@@ -59,10 +63,16 @@ function pushAutoShips(arr) {
 
     if(four != 0) {
       if(arr[x][y] == 0) {
-        if(checkEmptyFour(x, y, arr)) {
-          pushDelShipFour(x, y, arr, val);
-          --four;
-          pushShips(arr);
+        if(y < 7) {
+          let val = NumVal();
+          shipFourOne = val;
+          if(checkEmptyFour(x, y, arr)) {
+            pushDelShipFour(x, y, arr, val);
+            --four;
+            pushShips(arr);
+          } else {
+            pushShips(arr);
+          };
         } else {
           pushShips(arr);
         };
@@ -70,25 +80,37 @@ function pushAutoShips(arr) {
         pushShips(arr);
       };
     } else if(three != 0) {
-      if(arr[x][y] == 0) {
-        if(checkEmptyThree(x, y, 'shipThreeOne', arr)) {
-          pushDelShipThree(x, y, arr, val);
-          --three;
-          pushShips(arr);
+      if(y < 8) {
+        if(arr[x][y] == 0) {
+          let val = NumVal();
+          shipThreeOne = val;
+          if(checkEmptyThree(x, y, 'shipThreeOne', arr)) {
+            pushDelShipThree(x, y, arr, val);
+            --three;
+            pushShips(arr);
+          } else {
+            pushShips(arr)
+          };
         } else {
-          pushShips(arr)
+          pushShips(arr);
         };
       } else {
         pushShips(arr);
       };
     } else if(two != 0) {
-      if(arr[x][y] == 0) {
-        if(checkEmptyTwo(x, y, 'shipTwoOne', arr)) {
-          pushDelShipTwo(x, y, arr, val);
-          --two;
-          pushShips(arr);
+      if(y < 9) {
+        if(arr[x][y] == 0) {
+          let val = NumVal();
+          shipTwoOne = val;
+          if(checkEmptyTwo(x, y, 'shipTwoOne', arr)) {
+            pushDelShipTwo(x, y, arr, val);
+            --two;
+            pushShips(arr);
+          } else {
+            pushShips(arr)
+          };
         } else {
-          pushShips(arr)
+          pushShips(arr);
         };
       } else {
         pushShips(arr);
@@ -108,7 +130,6 @@ function pushAutoShips(arr) {
     } else {
       return false;
     };
-    
     return true;
   };
 
@@ -1193,7 +1214,7 @@ function checkEmptyFour(x, y, arr) {
   
     function checkNumxNully(x, y) {
       if(arr[x - 4][y] != 0) return false;
-      if(arr[x - 3][y + 1] != 0) return false;
+      if(arr[x - 4][y + 1] != 0) return false;
       if(arr[x - 3][y + 1] != 0) return false;
       if(arr[x - 2][y + 1] != 0) return false;
       if(arr[x - 1][y + 1] != 0) return false;
@@ -2074,6 +2095,10 @@ function checkEmptyTwo(x, y, val, arr) {
       return false;
     };
 
+    if(y == 9) {
+      return false;
+    };
+
     if(y == 8) { 
       if(checkNumxEighty(x, y)) return true;
       return false;
@@ -2081,10 +2106,6 @@ function checkEmptyTwo(x, y, val, arr) {
     
     if(y == 0) {
       if(checkNumxNully(x, y)) return true;
-      return false;
-    };
-    
-    if(y == 9) {
       return false;
     };
 
